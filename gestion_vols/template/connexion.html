@@ -10,9 +10,17 @@
 
     <!-- ======= Header ======= -->
     <header id="header" class="fixed-top d-flex align-items-center ">
-        {% include("layout/header_notsignedin.html") %}
+        {% include("layout/header_notsignedin.html") %} {% if info and info=="authEchec" %}
+        <div class="alert alert-danger text-center">Authentification refusée.</div>
+        {% endif %} {% if info and info=="logoutOK" %}
+        <div class="alert alert-primary text-center">
+            Vous êtes déconnecté. Merci de votre visite.
+        </div>
+        {% endif %}
     </header>
     <!-- End Header -->
+
+
 
     <main id="main">
 

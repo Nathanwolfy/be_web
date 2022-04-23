@@ -26,7 +26,7 @@ def connexion(infoMsg=''):
 @app.route("/logout")
 def logout():
     session.clear()
-    return redirect("/connecter/logoutOK")
+    return redirect("/connexion/logoutOK")
 
 @app.route("/login", methods=["POST"])
 def login():
@@ -37,7 +37,7 @@ def login():
     if "idUser" in session:
         return redirect("/index/authOK")
     else:
-        return redirect("/connecter/authEchec")
+        return redirect("/connexion/authEchec")
 
 @app.route("/services")
 def services():
