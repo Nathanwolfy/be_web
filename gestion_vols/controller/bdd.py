@@ -18,4 +18,4 @@ def verifAuthData(login, mdp):
         return msg, user"""
 
 def verifAuthData(login,mdp):
-    pass
+    return "authOK",[] 

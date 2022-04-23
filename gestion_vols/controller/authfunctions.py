@@ -19,3 +19,4 @@ def verifAuth(login, mdp):
         info="authEchec"
         print("Failed verifAuth : {}".format(err))
         return info
+
