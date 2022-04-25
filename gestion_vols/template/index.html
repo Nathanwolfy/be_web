@@ -3,7 +3,11 @@
 
 <head>
     <title>Accueil</title>
-    {% include("layout/head.html") %}
+    {% include("layout/head.html") %} {% if info and info=="authOK" %}
+    <div class="alert alert-success">
+        <span class="badge badge-pill bg-success">Success</span> Authentification réussie.
+    </div>
+    {% endif %}
 </head>
 
 <body>
