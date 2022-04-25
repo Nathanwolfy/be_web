@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : ven. 22 avr. 2022 à 10:04
+-- Généré le : lun. 25 avr. 2022 à 12:07
 -- Version du serveur :  8.0.25-0ubuntu0.20.04.1
 -- Version de PHP : 7.4.3
 
@@ -41,7 +41,10 @@ CREATE TABLE `aeroclub` (
 INSERT INTO `aeroclub` (`idAeroclub`, `nomAeroclub`, `color`) VALUES
 (1, 'acriv', 'rouge'),
 (2, 'Aéroclub Polygone 67', 'bleu'),
-(3, 'Aéroclub Leognan Saucats', 'vert');
+(3, 'Aéroclub Leognan Saucats', 'vert'),
+(4, 'Aéroclub de la côte de granit', 'Fushia'),
+(5, 'Aéroclub airbus france', 'gris'),
+(6, 'Aéroclub Eric Olivier', 'blanc');
 
 -- --------------------------------------------------------
 
@@ -61,11 +64,17 @@ CREATE TABLE `avions` (
 --
 
 INSERT INTO `avions` (`idAvion`, `immatAvion`, `typeAvion`, `idAeroclub`) VALUES
-(1, 'F-BOUD', 'A380', 2),
-(2, 'D-STAR', 'TB10', 1),
+(1, 'F-BOUD', 'A-380', 2),
+(2, 'D-STAR', 'TB-10', 1),
 (3, 'F-HZOP', 'CRJ1000', 3),
-(4, 'F-HVIU', 'DR400', 3),
-(5, 'F-PLAQ', 'DR400', 1);
+(4, 'F-HVIU', 'DR-400', 3),
+(5, 'F-PLAQ', 'DR-400', 1),
+(6, 'F-OZPE', 'DR-400', 4),
+(7, 'F-AFZJ', 'Concorde', 5),
+(8, 'F-SUUU', 'Cessna 172', 4),
+(9, 'F-MUCH', 'Cessna 182', 6),
+(10, 'F-OFFI', 'A-330', 2),
+(11, 'G-OACI', 'Piper-Arrow', 2);
 
 -- --------------------------------------------------------
 
@@ -114,7 +123,16 @@ CREATE TABLE `identification` (
 
 INSERT INTO `identification` (`idUser`, `nom`, `prenom`, `mail`, `login`, `motPasse`, `statut`, `avatar`) VALUES
 (1, 'Cujoh', 'Jolyne', 'jo.cujoh@gmail.com', 'JoJo', 'secudeouf', 1, 'avatar 1 je capte pas quoi mettre ici'),
-(2, 'Roger', 'Gold', 'golddroger@orange.fr', 'groger', 'secudeoufAUSSI', 1, 'Je sais toujours pas quoi mettre merci à tous');
+(2, 'Roger', 'Gold', 'golddroger@orange.fr', 'groger', 'secudeoufAUSSI', 1, 'Je sais toujours pas quoi mettre merci à tous'),
+(3, 'Pidou', 'George', 'pompidou@alumni.enac.fr', 'gpidou', 'pasencorehaché', 1, 'avatar 5'),
+(4, 'Blues', 'Jake', 'jake.blues@gmail.com', 'JakeChicagoLover', 'mdpencorepashaché', 1, 'encore une fois jsp avatar 6'),
+(5, 'Blues', 'Elwood', 'elwood.blues@gmail.com', 'Elwood', 'Onamissionforgod', 1, 'encore une fois jsp avatar 3'),
+(6, 'Schultz', 'King', 'docteur.schultz@wanadoo.fr', 'Schultz', 'Icompted6shots', 1, 'jsp quoi mettre mdrr 4'),
+(7, 'Goodman', 'Saul', 'itsallgoodman@advocate.us', 'SaulGoodman', 'IhateHank', 1, 'jsp 5'),
+(8, 'Alderson', 'Eliott', 'alderson@gmail.com', 'EliottAl', 'surelyNotSchizoWhyAreYouSayingThis', 1, 'jsp 2'),
+(9, 'Pond', 'Amy', 'amy.pond@uk-police.com', 'Amy', 'PandoraBox', 1, 'jsp1'),
+(10, 'Shelby', 'Arthur', 'arthur@shelby-inc-int-co.com', 'Fookin Arthur', 'FookLinda', 1, 'jsp 4'),
+(11, 'Jonàsson', 'Gry', 'gry.jonasson@norge-edda.no', 'Sif', 'IHateJutul', 1, 'jsp 6');
 
 -- --------------------------------------------------------
 
@@ -178,13 +196,13 @@ ALTER TABLE `typeVol`
 -- AUTO_INCREMENT pour la table `aeroclub`
 --
 ALTER TABLE `aeroclub`
-  MODIFY `idAeroclub` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idAeroclub` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pour la table `avions`
 --
 ALTER TABLE `avions`
-  MODIFY `idAvion` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idAvion` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT pour la table `events`
@@ -196,7 +214,7 @@ ALTER TABLE `events`
 -- AUTO_INCREMENT pour la table `identification`
 --
 ALTER TABLE `identification`
-  MODIFY `idUser` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idUser` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
