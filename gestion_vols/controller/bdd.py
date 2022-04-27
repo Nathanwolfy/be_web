@@ -159,5 +159,5 @@ def add_eventsData(param_start_date_events, param_end_date_events, param_text_ev
         msg = "Failed add events data : {}".format(err)
     return msg, last_id
 
-def del_eventsData():
+
     
