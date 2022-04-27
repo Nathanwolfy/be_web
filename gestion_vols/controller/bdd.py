@@ -108,9 +108,9 @@ def get_avionsData():
     return msg, liste_avions
 
 def add_avionsData(param_immatAvion_avions, param_typeAvion_avions, param_idAeroclub_avions):
-    last_id_aeroclub_possible = last_id_table("aeroclub")[1]
-    if param_idAeroclub_avions > last_id_aeroclub_possible or param_idAeroclub_avions < 1:
-        return "Failed add avions data : id_aeroclub does not match with database"
+#    last_id_aeroclub_possible = last_id_table("aeroclub")[1]
+#    if param_idAeroclub_avions > last_id_aeroclub_possible or param_idAeroclub_avions < 1:
+#        return "Failed add avions data : id_aeroclub does not match with database"
     try:
         cnx, error = connexion()
         cursor = cnx.cursor()
