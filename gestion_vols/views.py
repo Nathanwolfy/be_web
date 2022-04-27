@@ -1,4 +1,5 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, session, request, redirect
+from .controller import authfunctions
 app = Flask(__name__)
 app.template_folder= "template"
 app.static_folder= "static"
@@ -18,16 +19,25 @@ def blog():
     return render_template("blog.html")
 
 @app.route("/connexion")
-def connexion():
-    return render_template("connexion.html")
+@app.route("/connexion/<infoMsg>")
+def connexion(infoMsg=''):
+    return render_template("connexion.html", info=infoMsg)
 
-@app.route("/portfolio-details")
-def portfolio_details():
-    return render_template("portfolio-details.html")
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect("/connexion/logoutOK")
 
-@app.route("/portfolio")
-def portfolio():
-    return render_template("portfolio.html")
+@app.route("/login", methods=["POST"])
+def login():
+    login = request.form['login']
+    password = request.form['mdp']
+    msg = authfunctions.verifAuth(login, password)
+    print(msg)
+    if "idUser" in session:
+        return redirect("/index/authOK")
+    else:
+        return redirect("/connexion/authEchec")
 
 @app.route("/services")
 def services():
