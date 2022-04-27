@@ -158,6 +158,30 @@ def add_eventsData(param_start_date_events, param_end_date_events, param_text_ev
         last_id = None
         msg = "Failed add events data : {}".format(err)
     return msg, last_id
+def del_eventsData(param_idEvent_events):
+    try:
+        cnx, error = connexion()
+        cursor = cnx.cursor()
+        sql = "DELETE FROM events WHERE idEvent = %s"
+        param = (param_idEvent_events,)
+        cursor.execute(sql, param)
+        cnx.commit()
+        close_bd(cursor, cnx)
+        msg = "OK del event"
+    except mysql.connector.Error as err :
+        msg = "Failed del event data : {}".format(err)
+    return msg
 
-def del_eventsData():
-    
+def update_eventsData(idEvent, champ, newvalue):
+    try:
+        cnx, error = connexion()
+        cursor = cnx.cursor()
+        sql = "UPDATE events SET "+champ+" = %s WHERE idEvent = %s"
+        param = (newvalue, idEvent)
+        cursor.execute(sql, param)
+        cnx.commit()
+        close_bd(cursor, cnx)
+        msg = "OK update event"
+    except mysql.connector.Error as err:
+        msg = "Failed update event data : {}".format(err)
+    return msg
