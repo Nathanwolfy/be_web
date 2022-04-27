@@ -6,7 +6,7 @@ WEB_SERVER = {"host": "localhost",
 #Configuration du serveur de BDD
 DB_SERVER = {
 "user": "root",
-"password": "mysql",
+"password": "",
 "host": "localhost",
 "port": 3306, #8889 si MAC
 "database": "IENAC21_Bineau_Dagorn_Dauriac_Ledergerber", #nom de la BDD
