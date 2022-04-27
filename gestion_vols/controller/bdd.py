@@ -33,6 +33,7 @@ def verifAuthData(login, mdp):
         param=(login, mdp)
         cursor.execute(sql, param)
         user = cursor.fetchone()
+        print(user)
         close_bd(cursor, cnx)
         msg = "authOK"
     except mysql.connector.Error as err:
