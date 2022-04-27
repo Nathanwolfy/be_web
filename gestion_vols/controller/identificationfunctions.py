@@ -18,5 +18,5 @@ def verifAuth(login, mdp):
     except TypeError as err:
         info="authEchec"
         print("Failed verifAuth : {}".format(err))
-        return info
+    return info
 
