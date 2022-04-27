@@ -1,6 +1,6 @@
 from flask import Flask, render_template, session, request, redirect
 from .controller import identificationfunctions
-from .model import bdd as bdd
+from .controller import bdd as bdd
 
 app = Flask(__name__)
 app.template_folder= "template"
