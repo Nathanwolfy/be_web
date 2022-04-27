@@ -43,8 +43,7 @@
         <!-- ======= Connexion Section ======= -->
         <section class="connexion" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
             <div class="text-center">
-
-                <form action="login" method="POST" class="connexion-form">
+                <form method="POST" class="connexion-form">
                     <div class="form-group mt-3">
                         <input class="form-control" type="text" name="login" id="login" placeholder="Identifiant" required/>
                     </div>
@@ -52,11 +51,9 @@
                         <input class="form-control" type="password" name="mdp" id="mdp" placeholder="Mot de passe" required/>
                     </div>
                     <div class="form-group mt-3">
-                        <button type="submit">Connexion</button>
+                        <button formaction="login" type="submit">Connexion</button>
                     </div>
                 </form>
-
-
             </div>
         </section>
         <!-- End Connexion Section -->
