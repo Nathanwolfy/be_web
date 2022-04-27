@@ -1,5 +1,6 @@
 from flask import Flask, render_template, session, request, redirect
 from .controller import authfunctions
+from .model import bdd as bdd
 app = Flask(__name__)
 app.template_folder= "template"
 app.static_folder= "static"
