@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : lun. 25 avr. 2022 à 12:07
+-- Généré le : mer. 27 avr. 2022 à 16:30
 -- Version du serveur :  8.0.25-0ubuntu0.20.04.1
 -- Version de PHP : 7.4.3
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `IENAC21_Bineau_Dagorn_Dauriac_Ledergerber`
+-- Base de données : `beweb`
 --
 
 -- --------------------------------------------------------
@@ -32,7 +32,7 @@ CREATE TABLE `aeroclub` (
   `idAeroclub` int NOT NULL,
   `nomAeroclub` varchar(50) NOT NULL,
   `color` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `aeroclub`
@@ -57,7 +57,7 @@ CREATE TABLE `avions` (
   `immatAvion` varchar(20) NOT NULL,
   `typeAvion` varchar(20) NOT NULL,
   `idAeroclub` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `avions`
@@ -91,7 +91,7 @@ CREATE TABLE `events` (
   `idType` varchar(10) NOT NULL,
   `idUserReserver` int NOT NULL,
   `idUserEnseigner` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `events`
@@ -115,7 +115,7 @@ CREATE TABLE `identification` (
   `motPasse` varchar(100) NOT NULL,
   `statut` int NOT NULL,
   `avatar` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `identification`
@@ -141,17 +141,17 @@ INSERT INTO `identification` (`idUser`, `nom`, `prenom`, `mail`, `login`, `motPa
 --
 
 CREATE TABLE `typeVol` (
-  `idType` varchar(10) NOT NULL,
-  `nomType` varchar(100) NOT NULL DEFAULT 'VFR'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `idTypeVol` int NOT NULL,
+  `nomTypeVol` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'VFR'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `typeVol`
 --
 
-INSERT INTO `typeVol` (`idType`, `nomType`) VALUES
-('TV1', 'VFR'),
-('TV2', 'IFR');
+INSERT INTO `typeVol` (`idTypeVol`, `nomTypeVol`) VALUES
+(1, 'VFR'),
+(2, 'IFR');
 
 --
 -- Index pour les tables déchargées
@@ -186,7 +186,7 @@ ALTER TABLE `identification`
 -- Index pour la table `typeVol`
 --
 ALTER TABLE `typeVol`
-  ADD PRIMARY KEY (`idType`);
+  ADD PRIMARY KEY (`idTypeVol`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
@@ -215,6 +215,12 @@ ALTER TABLE `events`
 --
 ALTER TABLE `identification`
   MODIFY `idUser` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT pour la table `typeVol`
+--
+ALTER TABLE `typeVol`
+  MODIFY `idTypeVol` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
