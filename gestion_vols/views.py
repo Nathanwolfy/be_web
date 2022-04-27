@@ -8,9 +8,9 @@ app.static_folder= "static"
 app.config.from_object('gestion_vols.config')
 
 @app.route("/")
-@app.route("/index")
-def index():
-    return render_template("index.html")
+@app.route("/index/<infoMsg>")
+def index(infoMsg=''):
+    return render_template("index.html", info=infoMsg)
 
 @app.route("/about")
 def about():

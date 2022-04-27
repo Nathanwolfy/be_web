@@ -108,9 +108,9 @@ def get_avionsData():
     return msg, liste_avions
 
 def add_avionsData(param_immatAvion_avions, param_typeAvion_avions, param_idAeroclub_avions):
-    last_id_aeroclub_possible = last_id_table("aeroclub")[1]
-    if param_idAeroclub_avions > last_id_aeroclub_possible or param_idAeroclub_avions < 1:
-        return "Failed add avions data : id_aeroclub does not match with database"
+#    last_id_aeroclub_possible = last_id_table("aeroclub")[1]
+#    if param_idAeroclub_avions > last_id_aeroclub_possible or param_idAeroclub_avions < 1:
+#        return "Failed add avions data : id_aeroclub does not match with database"
     try:
         cnx, error = connexion()
         cursor = cnx.cursor()
@@ -158,6 +158,30 @@ def add_eventsData(param_start_date_events, param_end_date_events, param_text_ev
         last_id = None
         msg = "Failed add events data : {}".format(err)
     return msg, last_id
+def del_eventsData(param_idEvent_events):
+    try:
+        cnx, error = connexion()
+        cursor = cnx.cursor()
+        sql = "DELETE FROM events WHERE idEvent = %s"
+        param = (param_idEvent_events,)
+        cursor.execute(sql, param)
+        cnx.commit()
+        close_bd(cursor, cnx)
+        msg = "OK del event"
+    except mysql.connector.Error as err :
+        msg = "Failed del event data : {}".format(err)
+    return msg
 
-
-    
+def update_eventsData(idEvent, champ, newvalue):
+    try:
+        cnx, error = connexion()
+        cursor = cnx.cursor()
+        sql = "UPDATE events SET "+champ+" = %s WHERE idEvent = %s"
+        param = (newvalue, idEvent)
+        cursor.execute(sql, param)
+        cnx.commit()
+        close_bd(cursor, cnx)
+        msg = "OK update event"
+    except mysql.connector.Error as err:
+        msg = "Failed update event data : {}".format(err)
+    return msg

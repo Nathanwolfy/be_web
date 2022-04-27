@@ -32,7 +32,7 @@ CREATE TABLE `aeroclub` (
   `idAeroclub` int NOT NULL,
   `nomAeroclub` varchar(50) NOT NULL,
   `color` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `aeroclub`
@@ -57,7 +57,7 @@ CREATE TABLE `avions` (
   `immatAvion` varchar(20) NOT NULL,
   `typeAvion` varchar(20) NOT NULL,
   `idAeroclub` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `avions`
@@ -91,7 +91,7 @@ CREATE TABLE `events` (
   `idType` varchar(10) NOT NULL,
   `idUserReserver` int NOT NULL,
   `idUserEnseigner` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `events`
@@ -115,7 +115,7 @@ CREATE TABLE `identification` (
   `motPasse` varchar(100) NOT NULL,
   `statut` int NOT NULL,
   `avatar` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `identification`
@@ -143,7 +143,7 @@ INSERT INTO `identification` (`idUser`, `nom`, `prenom`, `mail`, `login`, `motPa
 CREATE TABLE `typeVol` (
   `idType` varchar(10) NOT NULL,
   `nomType` varchar(100) NOT NULL DEFAULT 'VFR'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `typeVol`
