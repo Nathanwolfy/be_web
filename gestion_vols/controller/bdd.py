@@ -158,6 +158,7 @@ def add_eventsData(param_start_date_events, param_end_date_events, param_text_ev
         last_id = None
         msg = "Failed add events data : {}".format(err)
     return msg, last_id
+
 def del_eventsData(param_idEvent_events):
     try:
         cnx, error = connexion()
@@ -185,3 +186,36 @@ def update_eventsData(idEvent, champ, newvalue):
     except mysql.connector.Error as err:
         msg = "Failed update event data : {}".format(err)
     return msg
+
+#fonctions de la table typeVol
+def get_typeVolData():
+    try:
+        cnx, error = connexion()
+        if error is not None:
+            return error, None #pb de connection a la bdd
+        cursor = cnx.cursor(dictionary=True)
+        sql = "SELECT * FROM typeVol"
+        cursor.execute(sql)
+        liste_events = cursor.fetchall()
+        close_bd(cursor, cnx)
+        msg = "OK get data in typeVol"
+    except mysql.connector.Error as err :
+        liste_events = None
+        msg = "Failed get typeVol data : {}".format(err)
+    return msg, liste_events
+
+def add_typeVolData(param_nomTypeVol_typeVol):
+    try:
+        cnx, error = connexion()
+        cursor = cnx.cursor()
+        sql = "INSERT INTO typeVol (nomTypeVol) VALUES (%s)"
+        param = (param_nomTypeVol_typeVol,)
+        cursor.execute(sql, param)
+        last_id = cursor.lastrowid #dernier idTypeVol utilise pour l'auto incrementation
+        cnx.commit()
+        close_bd(cursor, cnx)
+        msg = "OK add typeVol"
+    except mysql.connector.Error as err:
+        last_id = None
+        msg = "Failed add typeVol data : {}".format(err)
+    return msg, last_id
