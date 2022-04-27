@@ -1,4 +1,4 @@
-from flask import Flask, render_template, session, request, redirect
+from flask import Flask, render_template, session, request, redirect, make_response
 from .controller import identificationfunctions
 from .controller import bdd as bdd
 
@@ -48,3 +48,7 @@ def services():
 @app.route("/team")
 def team():
     return render_template("team.html")
+
+@app.errorhandler(404)
+def page_not_found():
+    return make_response( render_template("404.html"), 404)

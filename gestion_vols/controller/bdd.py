@@ -41,6 +41,22 @@ def verifAuthData(login, mdp):
         msg = "Failed get Auth data : {}".format(err)
     return msg, user
 
+#fonction pour avoir le last id d'une table
+def last_id_table(table):
+    try:
+        cnx, error = connexion()
+        if error is not None:
+            return error, None #pb de connection a la bdd
+        cursor = cnx.cursor(dictionary=True)
+        sql = "SELECT * FROM {}".format(table)
+        last_id = cursor.lastrowid
+        close_bd(cursor, cnx)
+        msg = "OK get last id"
+    except mysql.connector.Error as err :
+        last_id = None
+        msg = "Failed get aeroclub data : {}".format(err)
+    return msg, last_id
+
 #fonctions de la table aeroclub
 def get_aeroclubData():
     try:
@@ -70,7 +86,102 @@ def add_aeroclubData(param_nom_aeroclub, param_color_aeroclub):
         close_bd(cursor, cnx)
         msg = "OK add aeroclub"
     except mysql.connector.Error as err:
+        last_id = None
         msg = "Failed add aeroclub data : {}".format(err)
     return msg, last_id
 
 #fonctions de la table avions
+def get_avionsData():
+    try:
+        cnx, error = connexion()
+        if error is not None:
+            return error, None #pb de connection a la bdd
+        cursor = cnx.cursor(dictionary=True)
+        sql = "SELECT * FROM avions"
+        cursor.execute(sql)
+        liste_avions = cursor.fetchall()
+        close_bd(cursor, cnx)
+        msg = "OK get data in avions"
+    except mysql.connector.Error as err :
+        liste_avions = None
+        msg = "Failed get avions data : {}".format(err)
+    return msg, liste_avions
+
+def add_avionsData(param_immatAvion_avions, param_typeAvion_avions, param_idAeroclub_avions):
+    last_id_aeroclub_possible = last_id_table("aeroclub")[1]
+    if param_idAeroclub_avions > last_id_aeroclub_possible or param_idAeroclub_avions < 1:
+        return "Failed add avions data : id_aeroclub does not match with database"
+    try:
+        cnx, error = connexion()
+        cursor = cnx.cursor()
+        sql = "INSERT INTO avions (immatAvion, typeAvion, idAeroclub) VALUES (%s, %s, %s)"
+        param = (param_immatAvion_avions, param_typeAvion_avions, param_idAeroclub_avions)
+        cursor.execute(sql, param)
+        last_id = cursor.lastrowid #dernier id_avion utilise pour l'auto incrementation
+        cnx.commit()
+        close_bd(cursor, cnx)
+        msg = "OK add avions"
+    except mysql.connector.Error as err:
+        last_id = None
+        msg = "Failed add avions data : {}".format(err)
+    return msg, last_id
+
+#fonctions de la table events
+def get_eventsData():
+    try:
+        cnx, error = connexion()
+        if error is not None:
+            return error, None #pb de connection a la bdd
+        cursor = cnx.cursor(dictionary=True)
+        sql = "SELECT * FROM events"
+        cursor.execute(sql)
+        liste_events = cursor.fetchall()
+        close_bd(cursor, cnx)
+        msg = "OK get data in events"
+    except mysql.connector.Error as err :
+        liste_events = None
+        msg = "Failed get events data : {}".format(err)
+    return msg, liste_events
+
+def add_eventsData(param_start_date_events, param_end_date_events, param_text_events, param_idAvion_events, param_idType_events, param_idUserReserver_events, param_idUserEnseigner_events):
+    try:
+        cnx, error = connexion()
+        cursor = cnx.cursor()
+        sql = "INSERT INTO events (start_date, end_date, text, idAvion, idType, idUserReserver, idUserEnseigner) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+        param = (param_start_date_events, param_end_date_events, param_text_events, param_idAvion_events, param_idType_events, param_idUserReserver_events, param_idUserEnseigner_events)
+        cursor.execute(sql, param)
+        last_id = cursor.lastrowid #dernier id_events utilise pour l'auto incrementation
+        cnx.commit()
+        close_bd(cursor, cnx)
+        msg = "OK add events"
+    except mysql.connector.Error as err:
+        last_id = None
+        msg = "Failed add events data : {}".format(err)
+    return msg, last_id
+def del_eventsData(param_idEvent_events):
+    try:
+        cnx, error = connexion()
+        cursor = cnx.cursor()
+        sql = "DELETE FROM events WHERE idEvent = %s"
+        param = (param_idEvent_events,)
+        cursor.execute(sql, param)
+        cnx.commit()
+        close_bd(cursor, cnx)
+        msg = "OK del event"
+    except mysql.connector.Error as err :
+        msg = "Failed del event data : {}".format(err)
+    return msg
+
+def update_eventsData(idEvent, champ, newvalue):
+    try:
+        cnx, error = connexion()
+        cursor = cnx.cursor()
+        sql = "UPDATE events SET "+champ+" = %s WHERE idEvent = %s"
+        param = (newvalue, idEvent)
+        cursor.execute(sql, param)
+        cnx.commit()
+        close_bd(cursor, cnx)
+        msg = "OK update event"
+    except mysql.connector.Error as err:
+        msg = "Failed update event data : {}".format(err)
+    return msg
