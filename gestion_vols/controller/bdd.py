@@ -146,14 +146,14 @@ def get_eventsData():
         msg = "Failed get events data : {}".format(err)
     return msg, liste_events
 
-def add_eventsData(param_start_date_events, param_end_date_events, param_text_events, param_idAvion_events, param_idType_events, param_idUserReserver_events, param_idUserEnseigner_events):
+def add_eventsData(param_start_date_events, param_end_date_events, param_text_events, param_idAvion_events, param_idTypeVol_events, param_idUserReserver_events, param_idUserEnseigner_events):
     try:
         cnx, error = connexion()
         if error is not None:
             return error, None #pb de connection a la bdd
         cursor = cnx.cursor()
-        sql = "INSERT INTO events (start_date, end_date, text, idAvion, idType, idUserReserver, idUserEnseigner) VALUES (%s, %s, %s, %s, %s, %s, %s)"
-        param = (param_start_date_events, param_end_date_events, param_text_events, param_idAvion_events, param_idType_events, param_idUserReserver_events, param_idUserEnseigner_events)
+        sql = "INSERT INTO events (start_date, end_date, text, idAvion, idTypeVol, idUserReserver, idUserEnseigner) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+        param = (param_start_date_events, param_end_date_events, param_text_events, param_idAvion_events, param_idTypeVol_events, param_idUserReserver_events, param_idUserEnseigner_events)
         cursor.execute(sql, param)
         last_id = cursor.lastrowid #dernier id_events utilise pour l'auto incrementation
         cnx.commit()
