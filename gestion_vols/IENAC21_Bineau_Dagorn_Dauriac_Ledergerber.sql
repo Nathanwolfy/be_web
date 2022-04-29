@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : ven. 29 avr. 2022 à 07:54
+-- Généré le : ven. 29 avr. 2022 à 08:29
 -- Version du serveur :  8.0.25-0ubuntu0.20.04.1
 -- Version de PHP : 7.4.3
 
@@ -21,7 +21,7 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `IENAC21_Bineau_Dagorn_Dauriac_Ledergerber`
 --
-CREATE DATABASE IF NOT EXISTS `IENAC21_Bineau_Dagorn_Dauriac_Ledergerber` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+CREATE DATABASE IF NOT EXISTS `IENAC21_Bineau_Dagorn_Dauriac_Ledergerber` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
 USE `IENAC21_Bineau_Dagorn_Dauriac_Ledergerber`;
 
 -- --------------------------------------------------------
@@ -34,7 +34,7 @@ CREATE TABLE `aeroclub` (
   `idAeroclub` int NOT NULL,
   `nomAeroclub` varchar(50) NOT NULL,
   `color` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `aeroclub`
@@ -59,7 +59,7 @@ CREATE TABLE `avions` (
   `immatAvion` varchar(20) NOT NULL,
   `typeAvion` varchar(20) NOT NULL,
   `idAeroclub` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `avions`
@@ -90,17 +90,18 @@ CREATE TABLE `events` (
   `end_date` datetime NOT NULL,
   `text` text,
   `idAvion` int NOT NULL,
-  `idType` varchar(10) NOT NULL,
+  `idTypeVol` int NOT NULL DEFAULT '1',
   `idUserReserver` int NOT NULL,
   `idUserEnseigner` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `events`
 --
 
-INSERT INTO `events` (`idEvent`, `start_date`, `end_date`, `text`, `idAvion`, `idType`, `idUserReserver`, `idUserEnseigner`) VALUES
-(1, '2022-05-14 10:00:00', '2022-05-14 11:00:00', 'vroum vroum l\'a trois huit eau', 1, '2', 1, NULL);
+INSERT INTO `events` (`idEvent`, `start_date`, `end_date`, `text`, `idAvion`, `idTypeVol`, `idUserReserver`, `idUserEnseigner`) VALUES
+(1, '2022-05-14 10:00:00', '2022-05-14 11:00:00', 'vroum vroum l\'a trois huit eau', 1, 2, 1, NULL),
+(2, '2022-05-14 10:00:00', '2022-05-14 11:00:00', 'DR400 aeroclub de la cote de granit sortie', 6, 1, 10, NULL);
 
 -- --------------------------------------------------------
 
@@ -117,24 +118,24 @@ CREATE TABLE `identification` (
   `motPasse` varchar(100) NOT NULL,
   `statut` int NOT NULL,
   `avatar` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `identification`
 --
 
 INSERT INTO `identification` (`idUser`, `nom`, `prenom`, `mail`, `login`, `motPasse`, `statut`, `avatar`) VALUES
-(1, 'Cujoh', 'Jolyne', 'jo.cujoh@gmail.com', 'JoJo', 'secudeouf', 1, 'avatar 1 je capte pas quoi mettre ici'),
-(2, 'Roger', 'Gold', 'golddroger@orange.fr', 'groger', 'secudeoufAUSSI', 1, 'Je sais toujours pas quoi mettre merci à tous'),
-(3, 'Pidou', 'George', 'pompidou@alumni.enac.fr', 'gpidou', 'ALORS_TONTON', 1, 'avatar 5'),
-(4, 'Blues', 'Jake', 'jake.blues@gmail.com', 'JakeChicagoLover', 'everybodyNeedSomebody', 2, 'encore une fois jsp avatar 6'),
-(5, 'Blues', 'Elwood', 'elwood.blues@gmail.com', 'Elwood', 'Onamissionforgod', 3, 'encore une fois jsp avatar 3'),
-(6, 'Schultz', 'King', 'docteur.schultz@wanadoo.fr', 'Schultz', 'Icompted6shots', 2, 'jsp quoi mettre mdrr 4'),
-(7, 'Goodman', 'Saul', 'itsallgoodman@advocate.us', 'SaulGoodman', 'IhateHank', 1, 'jsp 5'),
-(8, 'Alderson', 'Eliott', 'alderson@gmail.com', 'EliottAl', 'surelyNotSchizoWhyAreYouSayingThis', 2, 'jsp 2'),
-(9, 'Pond', 'Amy', 'amy.pond@uk-police.com', 'Amy', 'PandoraBox', 1, 'jsp1'),
-(10, 'Shelby', 'Arthur', 'arthur@shelby-inc-int-co.com', 'Fookin_Arthur', 'FookLinda', 2, 'jsp 4'),
-(11, 'Jonàsson', 'Gry', 'gry.jonasson@norge-edda.no', 'Sif', 'IHateJutul', 1, 'jsp 6');
+(1, 'Cujoh', 'Jolyne', 'jo.cujoh@gmail.com', 'JoJo', 'a1261932825216cd8e6467efb76c75cf457ab48cd9f27b3141612b01b45ae1a5', 1, 'avatar 1 je capte pas quoi mettre ici'),
+(2, 'Roger', 'Gold', 'golddroger@orange.fr', 'groger', '0f50dbd7a4eca96c909c79459d06aa799ce861e202a06307dad0d80b6bf9d987', 1, 'Je sais toujours pas quoi mettre merci à tous'),
+(3, 'Pidou', 'George', 'pompidou@alumni.enac.fr', 'gpidou', '849dc75289b318178843d550a715c8d520064e2dbc98242df2d2c734f0c405fe', 1, 'avatar 5'),
+(4, 'Blues', 'Jake', 'jake.blues@gmail.com', 'JakeChicagoLover', '7f4d5d23ae750c5837b4ad78066a02e670ca060a10b6ef246e85503eaeb80ec7', 2, 'encore une fois jsp avatar 6'),
+(5, 'Blues', 'Elwood', 'elwood.blues@gmail.com', 'Elwood', '6505cf667b2778a92f45fe1f8db44794e88dd3f6f8867e84c6b3d04885bd9577', 3, 'encore une fois jsp avatar 3'),
+(6, 'Schultz', 'King', 'docteur.schultz@wanadoo.fr', 'Schultz', '2ac2da2370ddba49b1122b9f9e7fb579eb1df86f9a368e09065bbb684761c3c1', 2, 'jsp quoi mettre mdrr 4'),
+(7, 'Goodman', 'Saul', 'itsallgoodman@advocate.us', 'SaulGoodman', '8f859599b7457b3aa662c7c0329e5401a982aca9797582fcce7b6eecffbc61ba', 1, 'jsp 5'),
+(8, 'Alderson', 'Eliott', 'alderson@gmail.com', 'EliottAl', '17c64ee62f8a141ae6ed2d0a33fb3bbc6140c2730294a98bab533ca6fbe7a85f', 2, 'jsp 2'),
+(9, 'Pond', 'Amy', 'amy.pond@uk-police.com', 'Amy', '7281d1e65e4fb38395ffb4326ba1e63b8957f5409fa468262fca91976cbc1ac3', 1, 'jsp1'),
+(10, 'Shelby', 'Arthur', 'arthur@shelby-inc-int-co.com', 'Fookin_Arthur', 'd22b30f2bc3ee8b4dbb021afc99914573b346c5be3123fc874cd403a6a53ac2c', 2, 'jsp 4'),
+(11, 'Jonàsson', 'Gry', 'gry.jonasson@norge-edda.no', 'Sif', '932f5464e9569db1dff28022d12d42e7bf7a4454c2475ae40f0e21b3848832d3', 1, 'jsp 6');
 
 -- --------------------------------------------------------
 
@@ -144,8 +145,8 @@ INSERT INTO `identification` (`idUser`, `nom`, `prenom`, `mail`, `login`, `motPa
 
 CREATE TABLE `typeVol` (
   `idTypeVol` int NOT NULL,
-  `nomTypeVol` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'VFR'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `nomTypeVol` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'VFR'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `typeVol`
@@ -177,7 +178,11 @@ ALTER TABLE `avions`
 -- Index pour la table `events`
 --
 ALTER TABLE `events`
-  ADD PRIMARY KEY (`idEvent`);
+  ADD PRIMARY KEY (`idEvent`),
+  ADD KEY `idTypeVol_Event` (`idTypeVol`),
+  ADD KEY `idUserReserver_Event` (`idUserReserver`),
+  ADD KEY `idUserEnseigner_Event` (`idUserEnseigner`),
+  ADD KEY `idAvion_Event` (`idAvion`);
 
 --
 -- Index pour la table `identification`
@@ -211,7 +216,7 @@ ALTER TABLE `avions`
 -- AUTO_INCREMENT pour la table `events`
 --
 ALTER TABLE `events`
-  MODIFY `idEvent` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idEvent` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `identification`
@@ -234,6 +239,15 @@ ALTER TABLE `typeVol`
 --
 ALTER TABLE `avions`
   ADD CONSTRAINT `idAeroclub_tableAvion` FOREIGN KEY (`idAeroclub`) REFERENCES `aeroclub` (`idAeroclub`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `events`
+--
+ALTER TABLE `events`
+  ADD CONSTRAINT `idAvion_Event` FOREIGN KEY (`idAvion`) REFERENCES `avions` (`idAvion`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `idTypeVol_Event` FOREIGN KEY (`idTypeVol`) REFERENCES `typeVol` (`idTypeVol`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `idUserEnseigner_Event` FOREIGN KEY (`idUserEnseigner`) REFERENCES `identification` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `idUserReserver_Event` FOREIGN KEY (`idUserReserver`) REFERENCES `identification` (`idUser`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
