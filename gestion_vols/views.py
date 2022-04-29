@@ -49,6 +49,10 @@ def services():
 def team():
     return render_template("team.html")
 
+@app.route("/compte")
+def compte():
+    return render_template("compte.html")
+
 @app.errorhandler(404)
-def page_not_found():
+def page_not_found(erreur):
     return make_response( render_template("404.html"), 404)

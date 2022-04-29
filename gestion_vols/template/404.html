@@ -6,11 +6,46 @@
     {% include("layout/head.html") %}
 </head>
 
-<!-- ======= Footer ======= -->
-<footer id="footer" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
-    {% include("layout/footer.html") %}
-</footer>
-<!-- End Footer -->
 
-<!-- Include scripts and back to top arrow-->
-{% include("layout/scripts.html") %}
+<body>
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-center ">
+        {% include("layout/header_notsignedin.html") %}
+    </header>
+    <!-- End Header -->
+
+    <main id="main">
+        <!-- ======= 404 Section ======= -->
+        <section class="breadcrumbs">
+            <div class="container">
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <h2>Erreur 404</h2>
+
+                    <ol>
+                        <li><a href="index">Accueil</a></li>
+                        <li>Erreur 404</li>
+                    </ol>
+                </div>
+
+            </div>
+        </section>
+       <!-- ======= End 404 Section ======= -->
+    </main>
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
+        {% include("layout/footer.html") %}
+    </footer>
+    <!-- End Footer -->
+
+    <!-- Include scripts and back to top arrow-->
+    {% include("layout/scripts.html") %}
+</body>
+
+
+
+
+
+
