@@ -1,5 +1,5 @@
 from flask import Flask, render_template, session, request, redirect, make_response
-from .controller import identificationfunctions
+from .controller import functions
 from .controller import bdd as bdd
 
 app = Flask(__name__)
@@ -35,7 +35,7 @@ def logout():
 def login():
     login = request.form['login']
     password = request.form['mdp']
-    msg = identificationfunctions.verifAuth(login, password)
+    msg = functions.verifAuth(login, password)
     print(msg)
     if "idUser" in session:
         return redirect("/index/authOK")
