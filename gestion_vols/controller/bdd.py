@@ -33,6 +33,7 @@ def verifAuthData(login, mdp):
         param=(login, mdp)
         cursor.execute(sql, param)
         user = cursor.fetchone()
+        print(user)
         close_bd(cursor, cnx)
         msg = "authOK"
     except mysql.connector.Error as err:
@@ -56,8 +57,26 @@ def last_id_table(table):
         msg = "Failed get aeroclub data : {}".format(err)
     return msg, last_id
 
+#fonction pour recuperer les donnees des differentes tables
+def get_tableData(table):
+    try:
+        cnx, error = connexion()
+        if error is not None:
+            return error, None #pb de connection a la bdd
+        cursor = cnx.cursor(dictionary=True)
+        sql = "SELECT * FROM "+table
+        cursor.execute(sql)
+        list_data = cursor.fetchall()
+        close_bd(cursor, cnx)
+        msg = "OK get data from "+table
+    except mysql.connector.Error as err :
+        list_data = None
+        msg = "Failed get "+table+" data : {}".format(err)
+    return msg, list_data
+
+
 #fonctions de la table aeroclub
-def get_aeroclubData():
+"""def get_aeroclubData():
     try:
         cnx, error = connexion()
         if error is not None:
@@ -71,7 +90,7 @@ def get_aeroclubData():
     except mysql.connector.Error as err :
         liste_aeroclub = None
         msg = "Failed get aeroclub data : {}".format(err)
-    return msg, liste_aeroclub
+    return msg, liste_aeroclub"""
 
 def add_aeroclubData(param_nom_aeroclub, param_color_aeroclub):
     try:
@@ -92,7 +111,7 @@ def add_aeroclubData(param_nom_aeroclub, param_color_aeroclub):
     return msg, last_id
 
 #fonctions de la table avions
-def get_avionsData():
+"""def get_avionsData():
     try:
         cnx, error = connexion()
         if error is not None:
@@ -106,12 +125,9 @@ def get_avionsData():
     except mysql.connector.Error as err :
         liste_avions = None
         msg = "Failed get avions data : {}".format(err)
-    return msg, liste_avions
+    return msg, liste_avions"""
 
 def add_avionsData(param_immatAvion_avions, param_typeAvion_avions, param_idAeroclub_avions):
-#    last_id_aeroclub_possible = last_id_table("aeroclub")[1]
-#    if param_idAeroclub_avions > last_id_aeroclub_possible or param_idAeroclub_avions < 1:
-#        return "Failed add avions data : id_aeroclub does not match with database"
     try:
         cnx, error = connexion()
         if error is not None:
@@ -130,7 +146,7 @@ def add_avionsData(param_immatAvion_avions, param_typeAvion_avions, param_idAero
     return msg, last_id
 
 #fonctions de la table events
-def get_eventsData():
+"""def get_eventsData():
     try:
         cnx, error = connexion()
         if error is not None:
@@ -144,7 +160,7 @@ def get_eventsData():
     except mysql.connector.Error as err :
         liste_events = None
         msg = "Failed get events data : {}".format(err)
-    return msg, liste_events
+    return msg, liste_events"""
 
 def add_eventsData(param_start_date_events, param_end_date_events, param_text_events, param_idAvion_events, param_idTypeVol_events, param_idUserReserver_events, param_idUserEnseigner_events):
     try:
@@ -197,7 +213,7 @@ def update_eventsData(idEvent, champ, newvalue):
     return msg
 
 #fonctions de la table typeVol
-def get_typeVolData():
+"""def get_typeVolData():
     try:
         cnx, error = connexion()
         if error is not None:
@@ -211,7 +227,7 @@ def get_typeVolData():
     except mysql.connector.Error as err :
         liste_events = None
         msg = "Failed get typeVol data : {}".format(err)
-    return msg, liste_events
+    return msg, liste_events"""
 
 def add_typeVolData(param_nomTypeVol_typeVol):
     try:
