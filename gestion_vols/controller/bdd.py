@@ -259,7 +259,7 @@ def update_userData(idUser, champ, newvalue):
             return error, None #pb de connection a la bdd
         cursor = cnx.cursor()
         sql = "UPDATE identification SET "+champ+" = %s WHERE idEvent = %s"
-        param = (newvalue, idEvent)
+        param = (newvalue, idUser)
         cursor.execute(sql, param)
         cnx.commit()
         close_bd(cursor, cnx)
