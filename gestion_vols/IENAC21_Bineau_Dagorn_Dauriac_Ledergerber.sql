@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : ven. 29 avr. 2022 à 07:49
+-- Généré le : ven. 29 avr. 2022 à 07:54
 -- Version du serveur :  8.0.25-0ubuntu0.20.04.1
 -- Version de PHP : 7.4.3
 
@@ -100,7 +100,7 @@ CREATE TABLE `events` (
 --
 
 INSERT INTO `events` (`idEvent`, `start_date`, `end_date`, `text`, `idAvion`, `idType`, `idUserReserver`, `idUserEnseigner`) VALUES
-(1, '2022-05-14 10:00:00', '2022-05-14 11:00:00', 'vroum vroum l\'a trois huit eau', 1, 'TV2', 1, NULL);
+(1, '2022-05-14 10:00:00', '2022-05-14 11:00:00', 'vroum vroum l\'a trois huit eau', 1, '2', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -133,8 +133,8 @@ INSERT INTO `identification` (`idUser`, `nom`, `prenom`, `mail`, `login`, `motPa
 (7, 'Goodman', 'Saul', 'itsallgoodman@advocate.us', 'SaulGoodman', 'IhateHank', 1, 'jsp 5'),
 (8, 'Alderson', 'Eliott', 'alderson@gmail.com', 'EliottAl', 'surelyNotSchizoWhyAreYouSayingThis', 2, 'jsp 2'),
 (9, 'Pond', 'Amy', 'amy.pond@uk-police.com', 'Amy', 'PandoraBox', 1, 'jsp1'),
-(10, 'Shelby', 'Arthur', 'arthur@shelby-inc-int-co.com', 'Fookin Arthur', 'FookLinda', 3, 'jsp 4'),
-(11, 'Jonàsson', 'Gry', 'gry.jonasson@norge-edda.no', 'Sif', 'IHateJutul', 3, 'jsp 6');
+(10, 'Shelby', 'Arthur', 'arthur@shelby-inc-int-co.com', 'Fookin_Arthur', 'FookLinda', 2, 'jsp 4'),
+(11, 'Jonàsson', 'Gry', 'gry.jonasson@norge-edda.no', 'Sif', 'IHateJutul', 1, 'jsp 6');
 
 -- --------------------------------------------------------
 
