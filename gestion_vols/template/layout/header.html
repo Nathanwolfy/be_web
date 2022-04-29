@@ -1,0 +1,32 @@
+<div class="container d-flex justify-content-between align-items-center">
+
+    <div class="logo">
+        <h1 class="text-light"><a href="index"><span>Aérocloud</span></a></h1>
+    </div>
+
+    <nav id="navbar" class="navbar">
+        <ul>
+            <li><a href="index">Accueil</a></li>
+
+            <li><a href="about">A propos</a></li>
+
+            <li><a href="team">Notre équipe</a></li>
+
+            <li><a href="blog">Blog</a></li>
+
+            {% if session.status != None %} {% if session.status == 3 %}
+            <li><a href="creationcomptes">Création de comptes</a></li>
+            {% else %}
+            <li><a href="calendrier">Calendrier</a></li>
+            {% endif %}
+            <li><a href="deconnexion">Déconnexion</a></li>
+            {% else %}
+            <li><a href="connexion">Connexion</a></li>
+            {% endif %}
+
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav>
+    <!-- .navbar -->
+
+</div>
