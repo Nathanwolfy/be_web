@@ -77,6 +77,8 @@ def get_aeroclubData():
 def add_aeroclubData(param_nom_aeroclub, param_color_aeroclub):
     try:
         cnx, error = connexion()
+        if error is not None:
+            return error, None #pb de connection a la bdd
         cursor = cnx.cursor()
         sql = "INSERT INTO aeroclub (nomAeroclub, color) VALUES (%s, %s)"
         param = (param_nom_aeroclub, param_color_aeroclub)
@@ -113,6 +115,8 @@ def add_avionsData(param_immatAvion_avions, param_typeAvion_avions, param_idAero
 #        return "Failed add avions data : id_aeroclub does not match with database"
     try:
         cnx, error = connexion()
+        if error is not None:
+            return error, None #pb de connection a la bdd
         cursor = cnx.cursor()
         sql = "INSERT INTO avions (immatAvion, typeAvion, idAeroclub) VALUES (%s, %s, %s)"
         param = (param_immatAvion_avions, param_typeAvion_avions, param_idAeroclub_avions)
@@ -146,6 +150,8 @@ def get_eventsData():
 def add_eventsData(param_start_date_events, param_end_date_events, param_text_events, param_idAvion_events, param_idType_events, param_idUserReserver_events, param_idUserEnseigner_events):
     try:
         cnx, error = connexion()
+        if error is not None:
+            return error, None #pb de connection a la bdd
         cursor = cnx.cursor()
         sql = "INSERT INTO events (start_date, end_date, text, idAvion, idType, idUserReserver, idUserEnseigner) VALUES (%s, %s, %s, %s, %s, %s, %s)"
         param = (param_start_date_events, param_end_date_events, param_text_events, param_idAvion_events, param_idType_events, param_idUserReserver_events, param_idUserEnseigner_events)
@@ -162,6 +168,8 @@ def add_eventsData(param_start_date_events, param_end_date_events, param_text_ev
 def del_eventsData(param_idEvent_events):
     try:
         cnx, error = connexion()
+        if error is not None:
+            return error, None #pb de connection a la bdd
         cursor = cnx.cursor()
         sql = "DELETE FROM events WHERE idEvent = %s"
         param = (param_idEvent_events,)
@@ -176,6 +184,8 @@ def del_eventsData(param_idEvent_events):
 def update_eventsData(idEvent, champ, newvalue):
     try:
         cnx, error = connexion()
+        if error is not None:
+            return error, None #pb de connection a la bdd
         cursor = cnx.cursor()
         sql = "UPDATE events SET "+champ+" = %s WHERE idEvent = %s"
         param = (newvalue, idEvent)
@@ -207,6 +217,8 @@ def get_typeVolData():
 def add_typeVolData(param_nomTypeVol_typeVol):
     try:
         cnx, error = connexion()
+        if error is not None:
+            return error, None #pb de connection a la bdd
         cursor = cnx.cursor()
         sql = "INSERT INTO typeVol (nomTypeVol) VALUES (%s)"
         param = (param_nomTypeVol_typeVol,)
@@ -219,3 +231,41 @@ def add_typeVolData(param_nomTypeVol_typeVol):
         last_id = None
         msg = "Failed add typeVol data : {}".format(err)
     return msg, last_id
+
+#fonctions de la table identification
+def add_userData(param_nom_identification, param_prenom_identification, param_mail_identification, param_login_identification, param_motPasse_identification, param_statut_identification, param_avatar_identification):
+    try:
+        cnx, error = connexion()
+        if error is not None:
+            return error, None #pb de connection a la bdd
+        cursor = cnx.cursor()
+        sql = "INSERT INTO identification (nom, prenom, mail, login, motPasse, statut, avatar) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+        param = (param_nom_identification, param_prenom_identification, param_mail_identification, param_login_identification, param_motPasse_identification, param_statut_identification, param_avatar_identification)
+        cursor.execute(sql, param)
+        last_id = cursor.lastrowid #dernier idUser utilise pour l'auto incrementation
+        cnx.commit()
+        close_bd(cursor, cnx)
+        msg = "OK add user"
+    except mysql.connector.Error as err:
+        last_id = None
+        msg = "Failed add user data : {}".format(err)
+    return msg, last_id
+    pass
+
+def update_userData(idUser, champ, newvalue):
+    try:
+        cnx, error = connexion()
+        if error is not None:
+            return error, None #pb de connection a la bdd
+        cursor = cnx.cursor()
+        sql = "UPDATE identification SET "+champ+" = %s WHERE idEvent = %s"
+        param = (newvalue, idEvent)
+        cursor.execute(sql, param)
+        cnx.commit()
+        close_bd(cursor, cnx)
+        msg = "OK update user"
+    except mysql.connector.Error as err:
+        msg = "Failed update user data : {}".format(err)
+    return msg
+
+#la fonctions verifAuthData est situee au dessus
