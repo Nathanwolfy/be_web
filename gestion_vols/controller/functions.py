@@ -4,7 +4,6 @@ from . import bdd
 def verifAuth(login, mdp):
     session.clear()#suppression sessions précédentes
     msg, user = bdd.verifAuthData(login, mdp)
-    print(msg)
     try:
         #authentification réussie
         #initialisation des sessions
@@ -14,6 +13,7 @@ def verifAuth(login, mdp):
         session["mail"] = user["mail"]
         session["statut"] = user["statut"]
         session["avatar"] = user["avatar"]
+        print(session["statut"])
         info = msg
     except TypeError as err:
         info="authEchec"

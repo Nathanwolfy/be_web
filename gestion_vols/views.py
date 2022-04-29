@@ -36,7 +36,6 @@ def login():
     login = request.form['login']
     password = request.form['mdp']
     msg = functions.verifAuth(login, password)
-    print(msg)
     if "idUser" in session:
         return redirect("/index/authOK")
     else:
