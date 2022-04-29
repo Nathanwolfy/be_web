@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : mer. 27 avr. 2022 à 16:30
+-- Généré le : ven. 29 avr. 2022 à 07:49
 -- Version du serveur :  8.0.25-0ubuntu0.20.04.1
 -- Version de PHP : 7.4.3
 
@@ -19,8 +19,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `beweb`
+-- Base de données : `IENAC21_Bineau_Dagorn_Dauriac_Ledergerber`
 --
+CREATE DATABASE IF NOT EXISTS `IENAC21_Bineau_Dagorn_Dauriac_Ledergerber` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+USE `IENAC21_Bineau_Dagorn_Dauriac_Ledergerber`;
 
 -- --------------------------------------------------------
 
@@ -124,15 +126,15 @@ CREATE TABLE `identification` (
 INSERT INTO `identification` (`idUser`, `nom`, `prenom`, `mail`, `login`, `motPasse`, `statut`, `avatar`) VALUES
 (1, 'Cujoh', 'Jolyne', 'jo.cujoh@gmail.com', 'JoJo', 'secudeouf', 1, 'avatar 1 je capte pas quoi mettre ici'),
 (2, 'Roger', 'Gold', 'golddroger@orange.fr', 'groger', 'secudeoufAUSSI', 1, 'Je sais toujours pas quoi mettre merci à tous'),
-(3, 'Pidou', 'George', 'pompidou@alumni.enac.fr', 'gpidou', 'pasencorehaché', 1, 'avatar 5'),
-(4, 'Blues', 'Jake', 'jake.blues@gmail.com', 'JakeChicagoLover', 'mdpencorepashaché', 1, 'encore une fois jsp avatar 6'),
-(5, 'Blues', 'Elwood', 'elwood.blues@gmail.com', 'Elwood', 'Onamissionforgod', 1, 'encore une fois jsp avatar 3'),
-(6, 'Schultz', 'King', 'docteur.schultz@wanadoo.fr', 'Schultz', 'Icompted6shots', 1, 'jsp quoi mettre mdrr 4'),
+(3, 'Pidou', 'George', 'pompidou@alumni.enac.fr', 'gpidou', 'ALORS_TONTON', 1, 'avatar 5'),
+(4, 'Blues', 'Jake', 'jake.blues@gmail.com', 'JakeChicagoLover', 'everybodyNeedSomebody', 2, 'encore une fois jsp avatar 6'),
+(5, 'Blues', 'Elwood', 'elwood.blues@gmail.com', 'Elwood', 'Onamissionforgod', 3, 'encore une fois jsp avatar 3'),
+(6, 'Schultz', 'King', 'docteur.schultz@wanadoo.fr', 'Schultz', 'Icompted6shots', 2, 'jsp quoi mettre mdrr 4'),
 (7, 'Goodman', 'Saul', 'itsallgoodman@advocate.us', 'SaulGoodman', 'IhateHank', 1, 'jsp 5'),
-(8, 'Alderson', 'Eliott', 'alderson@gmail.com', 'EliottAl', 'surelyNotSchizoWhyAreYouSayingThis', 1, 'jsp 2'),
+(8, 'Alderson', 'Eliott', 'alderson@gmail.com', 'EliottAl', 'surelyNotSchizoWhyAreYouSayingThis', 2, 'jsp 2'),
 (9, 'Pond', 'Amy', 'amy.pond@uk-police.com', 'Amy', 'PandoraBox', 1, 'jsp1'),
-(10, 'Shelby', 'Arthur', 'arthur@shelby-inc-int-co.com', 'Fookin Arthur', 'FookLinda', 1, 'jsp 4'),
-(11, 'Jonàsson', 'Gry', 'gry.jonasson@norge-edda.no', 'Sif', 'IHateJutul', 1, 'jsp 6');
+(10, 'Shelby', 'Arthur', 'arthur@shelby-inc-int-co.com', 'Fookin Arthur', 'FookLinda', 3, 'jsp 4'),
+(11, 'Jonàsson', 'Gry', 'gry.jonasson@norge-edda.no', 'Sif', 'IHateJutul', 3, 'jsp 6');
 
 -- --------------------------------------------------------
 
@@ -168,7 +170,8 @@ ALTER TABLE `aeroclub`
 --
 ALTER TABLE `avions`
   ADD PRIMARY KEY (`idAvion`),
-  ADD UNIQUE KEY `immatAvion` (`immatAvion`);
+  ADD UNIQUE KEY `immatAvion` (`immatAvion`),
+  ADD KEY `idAeroclub_tableAvion` (`idAeroclub`);
 
 --
 -- Index pour la table `events`
@@ -221,6 +224,16 @@ ALTER TABLE `identification`
 --
 ALTER TABLE `typeVol`
   MODIFY `idTypeVol` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `avions`
+--
+ALTER TABLE `avions`
+  ADD CONSTRAINT `idAeroclub_tableAvion` FOREIGN KEY (`idAeroclub`) REFERENCES `aeroclub` (`idAeroclub`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
