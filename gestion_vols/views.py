@@ -1,5 +1,5 @@
 from flask import Flask, render_template, session, request, redirect, make_response
-from .controller import functions
+from .controller import functions, hashage_mdp
 from .controller import bdd as bdd
 
 app = Flask(__name__)
@@ -34,7 +34,7 @@ def logout():
 @app.route("/login", methods=["POST"])
 def login():
     login = request.form['login']
-    password = request.form['mdp']
+    password = hashage_mdp.hash_mdp(request.form['mdp'])
     msg = functions.verifAuth(login, password)
     if "idUser" in session:
         return redirect("/index/authOK")
