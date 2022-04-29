@@ -22,6 +22,9 @@
             <li><a href="/logout">Déconnexion</a></li>
             {% else %}
             <li><a href="/connexion">Connexion</a></li>
+            {% endif %} {% if session['idUser'] %}
+            <img class="rounded-circle ms-2" src="/static/img/avatar/{{session.avatar}}.png" alt="Avatar">
+            <h5 class=" pt-2 text-dark"> {{ session.prenom }} {{ session.nom }}</h5>
             {% endif %}
 
         </ul>
