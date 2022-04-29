@@ -14,7 +14,7 @@
 
             <li><a href="blog">Blog</a></li>
 
-            {% if session.status != None %} {% if session.status == 3 %}
+            {% if session.status is in [1,2,3] %} {% if session.status == 3 %}
             <li><a href="creationcomptes">Création de comptes</a></li>
             {% else %}
             <li><a href="calendrier">Calendrier</a></li>
