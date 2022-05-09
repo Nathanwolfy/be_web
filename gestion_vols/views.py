@@ -1,3 +1,5 @@
+import mailbox
+from xml.dom import NoModificationAllowedErr
 from flask import Flask, render_template, session, request, redirect, make_response
 from .controller import functions, hashage_mdp
 from .controller import bdd as bdd
@@ -83,3 +85,17 @@ def fichiers(infoMsg = ''):
             return redirect("/fichiers/importDataEchec")
     else :
         return render_template("cours/fichiers.html", info = infoMsg)
+@app.route("/addMembre",methods=['POST'])
+def addMembre():
+    nom=request.form['NOM']
+    prenom=request.form['prenom']
+    mail=request.form['sonMail']
+    login=request.form['login']
+    motPasse=request.form['motPasse']
+    statut=request.form['rad[]']
+    avatar=request.form['avatar']
+    msg,lastId=bdd.add_UserData(nom,prenom,mail,login,motPasse,statut,avatar)
+    if msg=="OK add user":
+        return redirect("/compte/addUserOK")
+    else:
+        return redirect("/compte/addUserProblem")
