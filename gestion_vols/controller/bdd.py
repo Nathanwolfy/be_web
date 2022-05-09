@@ -242,8 +242,8 @@ def saveDataFromFile(data):
         cursor.execute(sql1)
         #insertion des nouvelles donnees
         for d in data:
-            sql = "INSERT INTO identification (idUser, nom, prenom, mail, login, motPasse, statut, avatar) VALUES (NULL, %s, %s, %s, %s, %s, %s, %s)"
-            param = (d["nom"], d["prenom"], d["mail"], d["login"], d["login"], d["motPasse"], d["statut"], d["avatar"])
+            sql = "INSERT INTO identification (nom, prenom, mail, login, motPasse, statut, avatar) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+            param = (d["nom"], d["prenom"], d["mail"], d["login"], d["motPasse"], d["statut"], d["avatar"])
             cursor.execute(sql, param)
             cnx.commit()
         #changement valeur autoincrement
