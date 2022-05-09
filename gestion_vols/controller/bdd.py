@@ -240,17 +240,13 @@ def saveDataFromFile(data):
         cursor = cnx.cursor()
         sql1 = "TRUNCATE TABLE identification"#suppression des donnees precedentes
         cursor.execute(sql1)
-        #insertion des nouvelles donnees
+        #insertion des nouvelles donnees, on pourrait passer par add_userData() mais il n'est pas
+        #optimise d'ouvrir et fermer la base de donnee pour chaque data inseree
         for d in data:
             sql = "INSERT INTO identification (nom, prenom, mail, login, motPasse, statut, avatar) VALUES (%s, %s, %s, %s, %s, %s, %s)"
             param = (d["nom"], d["prenom"], d["mail"], d["login"], d["motPasse"], d["statut"], d["avatar"])
             cursor.execute(sql, param)
             cnx.commit()
-        #changement valeur autoincrement
-        sql2 = "ALTER TABLE identification AUTO_INCREMENT=%s"
-        param2 = (len(data),)
-        cursor.execute(sql2, param)
-        cnx.commit()
         close_bd(cursor, cnx)
         msg = "addDataFromFileOK"
     except mysql.connector.Error as err:
