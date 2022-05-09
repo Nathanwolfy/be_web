@@ -231,3 +231,28 @@ def update_userData(idUser, champ, newvalue):
     return msg
 
 #la fonctions verifAuthData est situee au dessus
+
+def saveDataFromFile(data):
+    try:
+        cnx, error = connexion()
+        if error is not None:
+            return error
+        cursor = cnx.cursor()
+        sql1 = "TRUNCATE TABLE identification"#suppression des donnees precedentes
+        cursor.execute(sql1)
+        #insertion des nouvelles donnees
+        for d in data:
+            sql = "INSERT INTO identification (nom, prenom, mail, login, motPasse, statut, avatar) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+            param = (d["nom"], d["prenom"], d["mail"], d["login"], d["motPasse"], d["statut"], d["avatar"])
+            cursor.execute(sql, param)
+            cnx.commit()
+        #changement valeur autoincrement
+        sql2 = "ALTER TABLE identification AUTO_INCREMENT=%s"
+        param2 = (len(data),)
+        cursor.execute(sql2, param)
+        cnx.commit()
+        close_bd(cursor, cnx)
+        msg = "addDataFromFileOK"
+    except mysql.connector.Error as err:
+        msg = "Failed saveDataFromFile data : {}".fromat(err)
+    return msg
