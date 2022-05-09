@@ -2,8 +2,9 @@ import mysql.connector
 from mysql.connector import errorcode
 from ..config import DB_SERVER
 
-# connexion au serveur de BDD
+
 def connexion():
+    """cette fonction est pour se connecter au serveur de bdd"""
     cnx = ""
     try:
         cnx = mysql.connector.connect(**DB_SERVER)
@@ -18,12 +19,16 @@ def connexion():
             print(err)
     return cnx, error # error: remonte problème connexion
 
-# fermeture de la connexion au serveur de BDD
+
 def close_bd(cursor, cnx):
+    """cette fonction est pour la fermeture de la connexion au serveur de la bdd"""
     cursor.close()
     cnx.close()
 
+
 def verifAuthData(login, mdp):
+    """cette fonction est pour recuperer toutes les donnees d'un utilisateur sous
+    reserve que cet utilisateur existe, avec son login et mot de passe"""
     try:
         cnx, error = connexion()
         if error is not None:
@@ -40,8 +45,11 @@ def verifAuthData(login, mdp):
         msg = "Failed get Auth data : {}".format(err)
     return msg, user
 
-#fonction pour avoir le last id d'une table
+
 def last_id_table(table):
+    """cette fonction est pour recuperer le last Id d'une table dans le cas
+    ou nous voulons ajouter un element, en pratique nous utilisons l'auto
+    incrementation et laissons l'Id en Null"""
     try:
         cnx, error = connexion()
         if error is not None:
@@ -56,8 +64,8 @@ def last_id_table(table):
         msg = "Failed get aeroclub data : {}".format(err)
     return msg, last_id
 
-#fonction pour recuperer les donnees des differentes tables
 def get_tableData(table):
+    """cette fonction est utilisee pour recuperer les donnees des differentes tables"""
     try:
         cnx, error = connexion()
         if error is not None:
@@ -73,24 +81,13 @@ def get_tableData(table):
         msg = "Failed get "+table+" data : {}".format(err)
     return msg, list_data
 
+#Ici les differentes fonctions de 4 parmis les 5 tables sont :
+#get_aeroclubData() = get_tableData("aeroclub")
+#get_avionsData() = get_tableData("avions")
+#get_eventsData() = get_tableData("events")
+#get_typeVolData() = get_tableData("typeVol")
 
 #fonctions de la table aeroclub
-"""def get_aeroclubData():
-    try:
-        cnx, error = connexion()
-        if error is not None:
-            return error, None #pb de connection a la bdd
-        cursor = cnx.cursor(dictionary=True)
-        sql = "SELECT * FROM aeroclub"
-        cursor.execute(sql)
-        liste_aeroclub = cursor.fetchall()
-        close_bd(cursor, cnx)
-        msg = "OK get data in aeroclub"
-    except mysql.connector.Error as err :
-        liste_aeroclub = None
-        msg = "Failed get aeroclub data : {}".format(err)
-    return msg, liste_aeroclub"""
-
 def add_aeroclubData(param_nom_aeroclub, param_color_aeroclub):
     try:
         cnx, error = connexion()
@@ -110,22 +107,6 @@ def add_aeroclubData(param_nom_aeroclub, param_color_aeroclub):
     return msg, last_id
 
 #fonctions de la table avions
-"""def get_avionsData():
-    try:
-        cnx, error = connexion()
-        if error is not None:
-            return error, None #pb de connection a la bdd
-        cursor = cnx.cursor(dictionary=True)
-        sql = "SELECT * FROM avions"
-        cursor.execute(sql)
-        liste_avions = cursor.fetchall()
-        close_bd(cursor, cnx)
-        msg = "OK get data in avions"
-    except mysql.connector.Error as err :
-        liste_avions = None
-        msg = "Failed get avions data : {}".format(err)
-    return msg, liste_avions"""
-
 def add_avionsData(param_immatAvion_avions, param_typeAvion_avions, param_idAeroclub_avions):
     try:
         cnx, error = connexion()
@@ -145,22 +126,6 @@ def add_avionsData(param_immatAvion_avions, param_typeAvion_avions, param_idAero
     return msg, last_id
 
 #fonctions de la table events
-"""def get_eventsData():
-    try:
-        cnx, error = connexion()
-        if error is not None:
-            return error, None #pb de connection a la bdd
-        cursor = cnx.cursor(dictionary=True)
-        sql = "SELECT * FROM events"
-        cursor.execute(sql)
-        liste_events = cursor.fetchall()
-        close_bd(cursor, cnx)
-        msg = "OK get data in events"
-    except mysql.connector.Error as err :
-        liste_events = None
-        msg = "Failed get events data : {}".format(err)
-    return msg, liste_events"""
-
 def add_eventsData(param_start_date_events, param_end_date_events, param_text_events, param_idAvion_events, param_idTypeVol_events, param_idUserReserver_events, param_idUserEnseigner_events):
     try:
         cnx, error = connexion()
@@ -212,22 +177,6 @@ def update_eventsData(idEvent, champ, newvalue):
     return msg
 
 #fonctions de la table typeVol
-"""def get_typeVolData():
-    try:
-        cnx, error = connexion()
-        if error is not None:
-            return error, None #pb de connection a la bdd
-        cursor = cnx.cursor(dictionary=True)
-        sql = "SELECT * FROM typeVol"
-        cursor.execute(sql)
-        liste_events = cursor.fetchall()
-        close_bd(cursor, cnx)
-        msg = "OK get data in typeVol"
-    except mysql.connector.Error as err :
-        liste_events = None
-        msg = "Failed get typeVol data : {}".format(err)
-    return msg, liste_events"""
-
 def add_typeVolData(param_nomTypeVol_typeVol):
     try:
         cnx, error = connexion()
@@ -264,7 +213,6 @@ def add_userData(param_nom_identification, param_prenom_identification, param_ma
         last_id = None
         msg = "Failed add user data : {}".format(err)
     return msg, last_id
-    pass
 
 def update_userData(idUser, champ, newvalue):
     try:
