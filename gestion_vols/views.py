@@ -85,6 +85,7 @@ def fichiers(infoMsg = ''):
             return redirect("/fichiers/importDataEchec")
     else :
         return render_template("cours/fichiers.html", info = infoMsg)
+
 @app.route("/addMembre",methods=['POST'])
 def addMembre():
     nom=request.form['NOM']
