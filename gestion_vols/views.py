@@ -1,6 +1,8 @@
 from flask import Flask, render_template, session, request, redirect, make_response
 from .controller import functions, hashage_mdp
 from .controller import bdd as bdd
+import pandas, os
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 app.template_folder= "template"
@@ -56,3 +58,28 @@ def compte():
 @app.errorhandler(404)
 def page_not_found(erreur):
     return make_response( render_template("404.html"), 404)
+
+#gestion des fichiers
+@app.route("/fichiers")
+@app.route("/fichiers/<infoMsg>")
+@app.route("/fichiers", methods=["POST"])
+def fichiers(infoMsg = ''):
+    if "testFile" in request.files:
+        file = request.files['testFile']
+        #enregistrement du fichier dans le repertoire files
+        filename = secure_filename(file.filename)
+        UPLOAD_FOLDER = "myApp/static/files/"
+        file.save(os.path.join(UPLOAD_FOLDER, filename))
+        #enregistrement du fichier sur le serveur
+        xls = pandas.read_excel(UPLOAD_FOLDER+file.filename)
+        data = xls.to_dict('records')
+        print([file.filename, data])
+        #enregistrement des donnees en bdd
+        msg = bdd.saveDataFromFile(data)
+        print(msg)
+        if msg == "addDataFromFileOK":
+            return redirect("/sgbd/importDataOK")
+        else :
+            return redirect("/fichiers/importDataEchec")
+    else :
+        return render_template("cours/fichiers.html", info = infoMsg)
