@@ -105,8 +105,17 @@ def addMembre():
 #exporter les donnees dans un fichier
 @app.route("/exportToExcel")
 def exportToExcel():
-    msg, listeMembre = bdd.get_membreData()
+    msg, listeEvents = bdd.get_tableData("events")
     wb = Workbook()
     sheet = wb.active
     
-    headers
+    headers = [x for x in listeEvents[[0]]
+    
+    for index, value in enumerate(headers):
+        sheet.cell(row=1, column= index+1).value = value
+    for i, x in enumerate(listeEvents):
+        for idx, value in enumerate(x.values()):
+               sheet.cell(row=i+2, column=idx+1).value = value
+    wb.save('myApp/static/files/export.xls')
+    return redirect('/static/files/export.xls')
+               
