@@ -250,5 +250,5 @@ def saveDataFromFile(data):
         close_bd(cursor, cnx)
         msg = "addDataFromFileOK"
     except mysql.connector.Error as err:
-        msg = "Failed saveDataFromFile data : {}".fromat(err)
+        msg = "Failed saveDataFromFile data : {}".format(err)
     return msg
