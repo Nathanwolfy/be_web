@@ -5,6 +5,7 @@ from .controller import functions, hashage_mdp
 from .controller import bdd as bdd
 import pandas, os
 from werkzeug.utils import secure_filename
+from openpyxl import Workbook
 
 app = Flask(__name__)
 app.template_folder= "template"
@@ -100,3 +101,12 @@ def addMembre():
         return redirect("/compte/addUserOK")
     else:
         return redirect("/compte/addUserProblem")
+
+#exporter les donnees dans un fichier
+@app.route("/exportToExcel")
+def exportToExcel():
+    msg, listeMembre = bdd.get_membreData()
+    wb = Workbook()
+    sheet = wb.active
+    
+    headers
