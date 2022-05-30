@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Fichier</title>
+    {% include("layout/head.html") %}
+</head>
+
+<body>
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-center ">
+        {% include("layout/header.html") %}
+    </header>
+    <!-- End Header -->
+
+    <main id="main">
+
+<form action="/fichiers" method="POST" enctype="multipart/form-data" class="d-flex">
+    <label for="data"></label>
+    <input type="file" id="data" name="data_excel">
+    <button type="submit">
+        <i class="fas fa-download">Envoyer</i>
+    </button>
+</form>
+</main>
+<!-- End #main -->
+
+<!-- ======= Footer ======= -->
+<footer id="footer" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
+    {% include("layout/footer.html") %}
+</footer>
+<!-- End Footer -->
+
+<!-- Include scripts and back to top arrow-->
+{% include("layout/scripts.html") %}
+</body>
+
+</html>
