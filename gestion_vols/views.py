@@ -118,4 +118,7 @@ def exportToExcel():
                sheet.cell(row=i+2, column=idx+1).value = value
     wb.save('myApp/static/files/export.xls')
     return redirect('/static/files/export.xls')
-               
+
+@app.route("/calendrier")
+def calendrier():
+    return render_template("calendrier.html")
