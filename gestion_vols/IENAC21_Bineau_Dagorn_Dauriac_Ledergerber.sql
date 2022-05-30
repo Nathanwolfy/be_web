@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : lun. 09 mai 2022 à 09:09
+-- Généré le : lun. 30 mai 2022 à 09:15
 -- Version du serveur :  8.0.25-0ubuntu0.20.04.1
 -- Version de PHP : 7.4.3
 
@@ -101,7 +101,8 @@ CREATE TABLE `events` (
 
 INSERT INTO `events` (`idEvent`, `start_date`, `end_date`, `text`, `idAvion`, `idTypeVol`, `idUserReserver`, `idUserEnseigner`) VALUES
 (1, '2022-05-14 10:00:00', '2022-05-14 11:00:00', 'vroum vroum l\'a trois huit eau', 1, 2, 1, NULL),
-(2, '2022-05-14 10:00:00', '2022-05-14 11:00:00', 'DR400 aeroclub de la cote de granit sortie', 6, 1, 10, NULL);
+(2, '2022-05-14 10:00:00', '2022-05-14 11:00:00', 'DR400 aeroclub de la cote de granit sortie', 6, 1, 10, NULL),
+(3, '2022-05-15 14:30:00', '2022-05-15 17:00:00', 'Sortie du coté des alizés', 9, 1, 8, 11);
 
 -- --------------------------------------------------------
 
@@ -217,7 +218,7 @@ ALTER TABLE `avions`
 -- AUTO_INCREMENT pour la table `events`
 --
 ALTER TABLE `events`
-  MODIFY `idEvent` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idEvent` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `identification`
