@@ -238,8 +238,8 @@ def saveDataFromFile(data):
         if error is not None:
             return error
         cursor = cnx.cursor()
-        sql1 = "TRUNCATE TABLE identification"#suppression des donnees precedentes
-        cursor.execute(sql1)
+        #sql1 = "TRUNCATE TABLE events" #suppression des donnees precedentes
+        #cursor.execute(sql1)
         #insertion des nouvelles donnees, on pourrait passer par add_userData() mais il n'est pas
         #optimise d'ouvrir et fermer la base de donnee pour chaque data inseree
         for d in data:
