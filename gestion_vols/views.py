@@ -109,7 +109,7 @@ def exportToExcel():
     wb = Workbook()
     sheet = wb.active
     
-    headers = [x for x in listeEvents[[0]]
+    headers = [x for x in listeEvents[[0]]]
     
     for index, value in enumerate(headers):
         sheet.cell(row=1, column= index+1).value = value
