@@ -78,8 +78,8 @@ def page_not_found(erreur):
 @app.route("/fichiers/<infoMsg>")
 @app.route("/fichiers", methods=["POST"])
 def fichiers(infoMsg = ''):
-    if "data_file" in request.files:
-        file = request.files['data_file']
+    if "data_excel" in request.files :
+        file = request.files['data_excel']
         #enregistrement du fichier dans le repertoire files
         filename = secure_filename(file.filename)
         UPLOAD_FOLDER = "myApp/static/files/"
@@ -96,7 +96,7 @@ def fichiers(infoMsg = ''):
         else :
             return redirect("/fichiers/importDataEchec")
     else :
-        return render_template("cours/fichiers.html", info = infoMsg)
+        return render_template("/fichiers.html", info = infoMsg)
 
 
 #Création de comptes
