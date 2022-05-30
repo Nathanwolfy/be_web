@@ -55,8 +55,19 @@ def team():
     return render_template("team.html")
 
 @app.route("/compte")
-def compte():
-    return render_template("compte.html")
+@app.route("/compte/<infoMsg>")
+def compte(infoMsg=''):
+    return render_template("compte.html", info=infoMsg)
+
+@app.route("/addUserOK")
+def addUserOK():
+    session.clear()
+    return redirect("/compte/addUserOK")
+
+@app.route("/addUserProblem")
+def addUserProblem():
+    session.clear()
+    return redirect("/compte/addUserProblem")
 
 @app.errorhandler(404)
 def page_not_found(erreur):
@@ -87,6 +98,8 @@ def fichiers(infoMsg = ''):
     else :
         return render_template("cours/fichiers.html", info = infoMsg)
 
+
+#Création de comptes
 @app.route("/addMembre",methods=['POST'])
 def addMembre():
     nom=request.form['NOM']
@@ -96,11 +109,13 @@ def addMembre():
     motPasse=request.form['motPasse']
     statut=request.form['rad[]']
     avatar=request.form['avatar']
-    msg,lastId=bdd.add_UserData(nom,prenom,mail,login,motPasse,statut,avatar)
+    msg,lastId=bdd.add_userData(nom,prenom,mail,login,motPasse,statut,avatar)
     if msg=="OK add user":
         return redirect("/compte/addUserOK")
     else:
         return redirect("/compte/addUserProblem")
+
+
 
 #exporter les donnees dans un fichier
 @app.route("/exportToExcel")

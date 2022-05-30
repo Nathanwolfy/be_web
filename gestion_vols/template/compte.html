@@ -4,6 +4,7 @@
 <head>
     <title>Admin</title>
     {% include("layout/head.html") %}
+    
 </head>
 
 <body>
@@ -11,6 +12,12 @@
     <!-- ======= Header ======= -->
     <header id="header" class="fixed-top d-flex align-items-center ">
         {% include("layout/header.html") %}
+        {% if info and info == "addUserOK" %}
+            <div class="alert alert-success text-center"> Nouveau membre ajouté </div>
+        {% endif %}
+        {% if info and info == "addUserProblem" %}
+            <div class="alert alert-danger text-center"> Problème d'ajout du nouveau membre </div>
+        {% endif %}
     </header>
     <!-- End Header -->
 
@@ -76,10 +83,11 @@
                         <img src="/static/img/avatar/{{i}}.png"/>
                         <input type="radio" name="avatar" id="{{i}}" value="{{i}}"/>
                         <label for="{{i}}">{{i}}</label>
+                    {%if i==6%} </br>{%endif%} 
                     {% endfor %}
                 </div>
                 <div>
-                    <button type="button">Enregistrer les données</button>
+                    <button type="submit">Enregistrer les données</button>
                 </div>
             </div>
             
@@ -88,5 +96,10 @@
 
     </main>
 
-
+    <!-- ======= Footer ======= -->
+    <footer id="footer" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
+        {% include("layout/footer.html") %}
+    </footer>
+    <!-- End Footer -->
+    
 </body>
