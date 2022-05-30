@@ -5,7 +5,7 @@ from .controller import functions, hashage_mdp
 from .controller import bdd as bdd
 import pandas, os
 from werkzeug.utils import secure_filename
-from openpyxl import Workbook
+#from openpyxl import Workbook
 
 app = Flask(__name__)
 app.template_folder= "template"
