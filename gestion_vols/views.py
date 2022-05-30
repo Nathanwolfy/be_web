@@ -68,7 +68,7 @@ def page_not_found(erreur):
 @app.route("/fichiers", methods=["POST"])
 def fichiers(infoMsg = ''):
     if "data" in request.files:
-        file = request.files['testFile']
+        file = request.files['data']
         #enregistrement du fichier dans le repertoire files
         filename = secure_filename(file.filename)
         UPLOAD_FOLDER = "myApp/static/files/"
