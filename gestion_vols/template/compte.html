@@ -49,44 +49,48 @@
 
             <div class="text-center">
                 <div class="form-group mt-3">
-                    <label for="NOM">Nom</label>
+                    <label for="NOM">Nom</label></br>
                     <input type="text" name="NOM" id="NOM" placeholder="Entrer le nom de famille" required/>
                 </div>
                 <div class="form-group mt-3">
-                    <label for="prenom">Prénom</label>
+                    <label for="prenom">Prénom</label></br>
                     <input type="text" name="prenom" id="prenom" placeholder="Entrer le prénom" required/>
                 </div>
                 <div class="form-group mt-3">
-                    <label for="login">Identifiant</label>
+                    <label for="login">Identifiant</label></br>
                     <input type="text" name="login" id="login" placeholder="Entrer l'identifiant" required/>
                 </div>
                 <div class="form-group mt-3">
-                    <label for="motPasse">Mot de passe</label>
+                    <label for="motPasse">Mot de passe</label></br>
                     <input type="password" name="motPasse" id="motPasse" placeholder="Entrer le mot de passe" required/>
                 </div>
                 <div class="form-group mt-3">
-                    <label for="sonMail">Adresse électronique</label>
+                    <label for="sonMail">Adresse électronique</label></br>
                     <input type="email" name="sonMail" id="sonMail" placeholder="Entrer l'email" required/>
                 </div>
                 <div class="form-group mt-3">
+                    <label for="radio">Statut du nouveau membre</label></br>
+
                     <input type="radio" name="rad[]" id="R1" value="1"/>
-                    <label for="R1">Membre</label>
+                    <label for="R1">Membre &emsp;</label>
 
                     <input type="radio" name="rad[]" id="R2" value="2"/>
-                    <label for="R2">Gestionnaire</label>
+                    <label for="R2">Gestionnaire &emsp;</label>
 
                     <input type="radio" name="rad[]" id="R3" value="3"/>
                     <label for="R3">Administrateur</label>
                 </div>
                 <div class="form-group mt-3"> 
+                    <label for="radio">Avatar du nouveau membre</label></br>
                     {% for i in range(1,13) %}
                         <img src="/static/img/avatar/{{i}}.png"/>
                         <input type="radio" name="avatar" id="{{i}}" value="{{i}}"/>
-                        <label for="{{i}}">{{i}}</label>
-                    {%if i==6%} </br>{%endif%} 
+                        <label for="{{i}}">{{i}} &emsp;</label>
+                    {%if i==6%} </br></br>{%endif%} 
                     {% endfor %}
                 </div>
                 <div>
+                    </br>
                     <button type="submit">Enregistrer les données</button>
                 </div>
             </div>
