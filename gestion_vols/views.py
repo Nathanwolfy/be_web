@@ -137,3 +137,7 @@ def exportToExcel():
 @app.route("/calendrier")
 def calendrier():
     return render_template("calendrier.html")
+
+@app.route("/test")
+def test():
+    return render_template("test.html")

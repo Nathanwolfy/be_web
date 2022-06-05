@@ -4,19 +4,17 @@
 <head>
     <title>Admin</title>
     {% include("layout/head.html") %}
-    
+
 </head>
 
 <body>
 
     <!-- ======= Header ======= -->
     <header id="header" class="fixed-top d-flex align-items-center ">
-        {% include("layout/header.html") %}
-        {% if info and info == "addUserOK" %}
-            <div class="alert alert-success text-center"> Nouveau membre ajouté </div>
-        {% endif %}
-        {% if info and info == "addUserProblem" %}
-            <div class="alert alert-danger text-center"> Problème d'ajout du nouveau membre </div>
+        {% include("layout/header.html") %} {% if info and info == "addUserOK" %}
+        <div class="alert alert-success text-center"> Nouveau membre ajouté </div>
+        {% endif %} {% if info and info == "addUserProblem" %}
+        <div class="alert alert-danger text-center"> Problème d'ajout du nouveau membre </div>
         {% endif %}
     </header>
     <!-- End Header -->
@@ -71,31 +69,30 @@
                 <div class="form-group mt-3">
                     <label for="radio">Statut du nouveau membre</label></br>
 
-                    <input type="radio" name="rad[]" id="R1" value="1"/>
+                    <input type="radio" name="rad[]" id="R1" value="1" />
                     <label for="R1">Membre &emsp;</label>
 
-                    <input type="radio" name="rad[]" id="R2" value="2"/>
+                    <input type="radio" name="rad[]" id="R2" value="2" />
                     <label for="R2">Gestionnaire &emsp;</label>
 
-                    <input type="radio" name="rad[]" id="R3" value="3"/>
+                    <input type="radio" name="rad[]" id="R3" value="3" />
                     <label for="R3">Administrateur</label>
                 </div>
-                <div class="form-group mt-3"> 
+                <div class="form-group mt-3">
                     <label for="radio">Avatar du nouveau membre</label></br>
                     {% for i in range(1,13) %}
-                        <img src="/static/img/avatar/{{i}}.png"/>
-                        <input type="radio" name="avatar" id="{{i}}" value="{{i}}"/>
-                        <label for="{{i}}">{{i}} &emsp;</label>
-                    {%if i==6%} </br></br>{%endif%} 
-                    {% endfor %}
+                    <img src="/static/img/avatar/{{i}}.png" />
+                    <input type="radio" name="avatar" id="{{i}}" value="{{i}}" />
+                    <label for="{{i}}">{{i}} &emsp;</label> {%if i==6%} </br>
+                    </br>{%endif%} {% endfor %}
                 </div>
                 <div>
                     </br>
                     <button type="submit">Enregistrer les données</button>
                 </div>
             </div>
-            
-            
+
+
         </form>
 
     </main>
@@ -105,5 +102,5 @@
         {% include("layout/footer.html") %}
     </footer>
     <!-- End Footer -->
-    
+
 </body>
