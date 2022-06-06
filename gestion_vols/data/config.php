@@ -1,5 +1,5 @@
 <?php
-$dsn = "mysql:host=localhost;port=3306;dbname=IENAC21_Bineau_Dagorn_Dauriac_Ledergerber";
+$dsn = "mysql:host=localhost;dbname=IENAC21_Bineau_Dagorn_Dauriac_Ledergerber";
 $username = "root";
 $password = "";
  
