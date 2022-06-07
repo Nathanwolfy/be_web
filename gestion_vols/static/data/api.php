@@ -1,5 +1,4 @@
 <?php
-print "fichier bien chargé"
 
 require_once("config.php");
 $db = new PDO($dsn, $username, $password, $options);

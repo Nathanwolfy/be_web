@@ -1,7 +1,7 @@
 <?php
-$dsn = "mysql:host=localhost;dbname=IENAC21_Bineau_Dagorn_Dauriac_Ledergerber";
+$dsn = "mysql:host=localhost;dbname=ienac21_bineau_dagorn_dauriac_ledergerber";
 $username = "root";
-$password = "";
+$password = "mysql";
  
 $options = array(
     PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'",
