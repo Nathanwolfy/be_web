@@ -1,4 +1,5 @@
 import mailbox
+import pathlib
 from xml.dom import NoModificationAllowedErr
 from flask import Flask, render_template, session, request, redirect, make_response
 from .controller import functions, hashage_mdp
@@ -82,7 +83,7 @@ def fichiers(infoMsg = ''):
         file = request.files['data_excel']
         #enregistrement du fichier dans le repertoire files
         filename = secure_filename(file.filename)
-        UPLOAD_FOLDER = "myApp/static/files/"
+        UPLOAD_FOLDER = os.getcwd() + "\\gestion_vols\\static\\files\\"
         file.save(os.path.join(UPLOAD_FOLDER, filename))
         #enregistrement du fichier sur le serveur
         xls = pandas.read_excel(UPLOAD_FOLDER+file.filename)
