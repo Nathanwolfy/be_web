@@ -79,10 +79,8 @@ def page_not_found(erreur):
 @app.route("/fichiers/<infoMsg>")
 @app.route("/fichiers", methods=["POST"])
 def fichiers(infoMsg = ''):
-    print(request.files)
     if "data_excel" in request.files :
-        file = request.files['data_file.xls']
-        print("?")
+        file = request.files['data_excel']
         #enregistrement du fichier dans le repertoire files
         filename = secure_filename(file.filename)
         UPLOAD_FOLDER = os.getcwd() + "\\gestion_vols\\static\\files\\"
@@ -90,17 +88,18 @@ def fichiers(infoMsg = ''):
         #enregistrement du fichier sur le serveur
         xls = pandas.read_excel(UPLOAD_FOLDER+file.filename)
         data = xls.to_dict('records')
-        print([file.filename, data])
+        print(data)
         #enregistrement des donnees en bdd
         msg = bdd.saveDataFromFile(data)
-        print(msg)
-        print("hola mia amigo on galere")
         if msg == "addDataFromFileOK":
+            print("gg")
             return redirect("/sgbd/importDataOK")
         else :
+            print("pas gg")
+            print(msg)
+            print(data[0]["idUserEnseigner"])
             return redirect("/fichiers/importDataEchec")
     else :
-        print("wtf les amis")
         return render_template("/fichiers.html", info = infoMsg)
 
 

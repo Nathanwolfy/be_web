@@ -17,7 +17,7 @@ def connexion():
             print("La Base de données n'existe pas.")
         else:
             print(err)
-    return cnx, error # error: remonte problème connexion
+    return cnx, error # error: remonte probleme connexion
 
 
 def close_bd(cursor, cnx):
@@ -243,10 +243,20 @@ def saveDataFromFile(data):
         #insertion des nouvelles donnees, on pourrait passer par add_userData() mais il n'est pas
         #optimise d'ouvrir et fermer la base de donnee pour chaque data inseree
         for d in data:
-            sql = "INSERT INTO events (idEvent, start_date, end_date, text, idAvion, idTypeVol, idUserReserver, idUserEnseigner) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
-            param = (d["idEvent"], d["start_date"], d["end_date"], d["text"], d["idAvion"], d["idTypeVol"], d["idUserReserver"], d["idUserEnseigner"])
-            cursor.execute(sql, param)
-            cnx.commit()
+            
+
+            if str(d["idUserEnseigner"]) == "nan" :
+                sql = "INSERT INTO events (start_date, end_date, text, idAvion, idTypeVol, idUserReserver) VALUES (%s, %s, %s, %s, %s, %s)"
+                param = (d["start_date"], d["end_date"], d["text"], d["idAvion"], d["idTypeVol"], d["idUserReserver"])
+                cursor.execute(sql, param)
+                cnx.commit()
+                
+            else :
+                sql = "INSERT INTO events (start_date, end_date, text, idAvion, idTypeVol, idUserReserver, idUserEnseigner) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+                param = (d["start_date"], d["end_date"], d["text"], d["idAvion"], d["idTypeVol"], d["idUserReserver"], d["idUserEnseigner"])
+                cursor.execute(sql, param)
+                cnx.commit()
+
         close_bd(cursor, cnx)
         msg = "addDataFromFileOK"
     except mysql.connector.Error as err:
