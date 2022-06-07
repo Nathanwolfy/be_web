@@ -31,13 +31,14 @@
             <div class="dhx_cal_data"></div>
         </div>
         <script>
-            scheduler.setLoadMode("day");
             scheduler.init('scheduler_here', new Date(), "week");
+            scheduler.setLoadMode("day");
             scheduler.load("/static/data/api.php");
 
-            var dp = scheduler.createDataProcessor("/static/data/api.php");
-            dp.init(scheduler);
-            dp.setTransactionMode("JSON"); // use to transfer data with JSON
+            var dp = scheduler.createDataProcessor({
+                url: "/static/data/api.php",
+                mode: "REST"
+            });
         </script>
     </main>
     <!-- End #main -->
