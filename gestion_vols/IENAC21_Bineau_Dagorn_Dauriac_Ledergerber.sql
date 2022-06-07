@@ -100,7 +100,7 @@ CREATE TABLE `events` (
 --
 
 INSERT INTO `events` (`idEvent`, `start_date`, `end_date`, `text`, `idAvion`, `idTypeVol`, `idUserReserver`, `idUserEnseigner`) VALUES
-(1, '2022-05-14 10:00:00', '2022-05-14 11:00:00', 'vroum vroum l\'a trois huit eau', 1, 2, 1, NULL),
+(1, '2022-05-14 10:00:00', '2022-05-14 11:00:00', 'vroum vroum l a trois huit eau', 1, 2, 1, NULL),
 (2, '2022-05-14 10:00:00', '2022-05-14 11:00:00', 'DR400 aeroclub de la cote de granit sortie', 6, 1, 10, NULL),
 (3, '2022-05-15 14:30:00', '2022-05-15 17:00:00', 'Sortie du coté des alizés', 9, 1, 8, 11);
 
