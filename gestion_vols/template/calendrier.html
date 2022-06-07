@@ -33,9 +33,9 @@
         <script>
             scheduler.setLoadMode("day");
             scheduler.init('scheduler_here', new Date(), "week");
-            scheduler.load("data/api.php");
+            scheduler.load("/static/data/api.php");
 
-            var dp = scheduler.createDataProcessor("data/api.php");
+            var dp = scheduler.createDataProcessor("/static/data/api.php");
             dp.init(scheduler);
             dp.setTransactionMode("JSON"); // use to transfer data with JSON
         </script>
