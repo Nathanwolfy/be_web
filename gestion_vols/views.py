@@ -92,12 +92,8 @@ def fichiers(infoMsg = ''):
         #enregistrement des donnees en bdd
         msg = bdd.saveDataFromFile(data)
         if msg == "addDataFromFileOK":
-            print("gg")
-            return redirect("/sgbd/importDataOK")
+            return redirect("/fichiers/importDataOK")
         else :
-            print("pas gg")
-            print(msg)
-            print(data[0]["idUserEnseigner"])
             return redirect("/fichiers/importDataEchec")
     else :
         return render_template("/fichiers.html", info = infoMsg)
