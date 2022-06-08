@@ -34,17 +34,31 @@
             let elementCalendrier = document.getElementById("calendrier")
             let evenements = JSON.parse('{{evenements|safe}}')
                 // evenements.forEach(event => console.log(event))
+
             let calendar_res = []
             for (let k = 0; k < evenements.length; k++) {
                 new_event = {
                     title: evenements[k].text,
                     start: evenements[k].start_date,
-                    end: evenements[k].end_date
+                    end: evenements[k].end_date,
+                    resourceId: evenements[k].idAvion
                 }
                 calendar_res.push(new_event)
             }
 
+            let avions = JSON.parse('{{avions|safe}}')
+
+            let avions_res = []
+            for (let k = 0; k < avions.length; k++) {
+                new_avion = {
+                    id: avions[k].idAvion,
+                    title: avions[k].typeAvion + ' ' + avions[k].immatAvion
+                }
+                avions_res.push(new_avion)
+            }
+
             let calendar = new FullCalendar.Calendar(elementCalendrier, {
+                schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
                 initialView: 'resourceTimelineDay',
                 locale: 'fr',
                 headerToolbar: {
@@ -52,12 +66,17 @@
                     center: 'title',
                     end: 'dayGridMonth timeGridWeek'
                 },
-                aspectRatio: 1.5,
                 resourceAreaColumns: [{
                     field: 'title',
                     headerContent: 'Avion'
                 }],
-                resources: calendar_res
+                buttonText: {
+                    today: 'Aujourd\'hui',
+                    month: 'Mois',
+                    week: 'Semaine'
+                },
+                resources: avions_res,
+                events: calendar_res
             });
 
             calendar.render();

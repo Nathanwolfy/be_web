@@ -223,15 +223,7 @@ def calendrier():
     liste_evenements = json.dumps(liste_evenements, cls=DatetimeEncoder)
 
     #Récupérer la liste des avions
-    liste_avions = bdd.get_tableData('`avions`')[0]
-    liste_avions_tosend = []
-    liste_avions = json.dumps(liste_avions, cls=DatetimeEncoder)
-    print(liste_avions)
-
-
-
-
-
-
+    liste_avions = bdd.get_tableData('`avions`')[1]
+    liste_avions = json.dumps(liste_avions)
 
     return render_template("calendrier.html", evenements=liste_evenements, avions=liste_avions)

@@ -16,7 +16,9 @@
 
             {% if session.statut == 1 or session.statut == 2 or session.statut == 3 %} {% if session.statut == 3 %}
             <li><a href="/compte">Création de comptes</a></li>
-            {% else %} {% endif %}
+            {% elif session.statut == 2 %}
+            <li><a href="/fichiers">Importation planning</a></li>
+            {% endif %}
             <li><a href="/reservation">Réservez un vol</a></li>
             <li><a href="/logout">Déconnexion</a></li>
             {% else %}
