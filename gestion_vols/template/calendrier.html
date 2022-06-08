@@ -4,8 +4,7 @@
 <head>
     <title>Calendrier</title>
     {% include("layout/head.html") %}
-    <script src="https://cdn.dhtmlx.com/scheduler/edge/dhtmlxscheduler.js"></script>
-    <link href="https://cdn.dhtmlx.com/scheduler/edge/dhtmlxscheduler_material.css" rel="stylesheet" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.11.0/main.css" integrity="sha256-gcC8p9RfMq6rqz4TkMcZYBHTmnJ3VfWLxKJ0N4RgbLs=" crossorigin="anonymous">
 </head>
 
 <body>
@@ -15,30 +14,9 @@
         {% include("layout/header.html") %}
     </header>
     <!-- End Header -->
-
-    <main id="main">
-        <div id="scheduler_here" class="dhx_cal_container" style='width:100%; min-height:700px; height:100%;'>
-            <div class="dhx_cal_navline">
-                <div class="dhx_cal_prev_button">&nbsp;</div>
-                <div class="dhx_cal_next_button">&nbsp;</div>
-                <div class="dhx_cal_today_button"></div>
-                <div class="dhx_cal_date"></div>
-                <div class="dhx_cal_tab" name="day_tab"></div>
-                <div class="dhx_cal_tab" name="week_tab"></div>
-                <div class="dhx_cal_tab" name="month_tab"></div>
-            </div>
-            <div class="dhx_cal_header"></div>
-            <div class="dhx_cal_data"></div>
+    <main>
+        <div id="calendrier">
         </div>
-        <script>
-            scheduler.setLoadMode("day");
-            scheduler.init('scheduler_here', new Date(), "week");
-            scheduler.load("/static/data/api.php");
-
-            var dp = scheduler.createDataProcessor("/static/data/api.php");
-            dp.init(scheduler);
-            dp.setTransactionMode("JSON"); // use to transfer data with JSON
-        </script>
     </main>
     <!-- End #main -->
 
@@ -50,6 +28,42 @@
 
     <!-- Include scripts and back to top arrow-->
     {% include("layout/scripts.html") %}
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.11.0/main.min.js" integrity="sha256-RYuehXpnr248jInax6L9UXEegv6DvIRoN+lyxayiIFg=" crossorigin="anonymous"></script>
+    <script>
+        window.onload = () => {
+            let elementCalendrier = document.getElementById("calendrier")
+            let evenements = JSON.parse('{{info|safe}}')
+                // evenements.forEach(event => console.log(event))
+            let calendar = []
+            for (let k = 0; k < evenements.length; k++) {
+                new_event = {
+                    title: evenements[k].text,
+                    start: evenements[k].start_date,
+                    end: evenements[k].end_date
+                }
+                calendar.push(new_event)
+            }
+
+            let calendrier = new FullCalendar.Calendar(elementCalendrier, {
+                initialView: 'dayGridMonth',
+                locale: 'fr',
+                headerToolbar: {
+                    start: 'prev,next today',
+                    center: 'title',
+                    end: 'dayGridMonth timeGridWeek'
+                },
+                buttonText: {
+                    today: 'Aujourd\'hui',
+                    month: 'Mois',
+                    week: 'Semaine'
+                },
+                events: calendar
+            })
+
+            calendrier.render()
+        }
+    </script>
+
 </body>
 
 </html>

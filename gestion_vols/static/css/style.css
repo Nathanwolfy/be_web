@@ -2086,3 +2086,9 @@ section {
 #footer .credits a {
     color: #a2cce3;
 }
+
+#calendrier {
+    width: 100%;
+    margin: auto;
+    padding: 5%;
+}

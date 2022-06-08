@@ -1,17 +1,25 @@
 import mailbox
 import pathlib
 from xml.dom import NoModificationAllowedErr
+from flask_mysqldb import MySQL
 from flask import Flask, render_template, session, request, redirect, make_response
 from .controller import functions, hashage_mdp
 from .controller import bdd as bdd
 import pandas, os
 from werkzeug.utils import secure_filename
 from openpyxl import Workbook
+import json
 
 app = Flask(__name__)
 app.template_folder= "template"
 app.static_folder= "static"
 app.config.from_object('gestion_vols.config')
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_DB'] = 'ienac21_bineau_dagorn_dauriac_ledergerber'
+ 
+mysql = MySQL(app)
 
 @app.route("/")
 @app.route("/index")
@@ -134,9 +142,28 @@ def exportToExcel():
     wb.save('myApp/static/files/export.xls')
     return redirect('/static/files/export.xls')
 
+
+class DatetimeEncoder(json.JSONEncoder):
+    def default(self, obj):
+        try:
+            return super().default(obj)
+        except TypeError:
+            return str(obj)
+
 @app.route("/calendrier")
 def calendrier():
-    return render_template("calendrier.html")
+    cursor = mysql.connection.cursor()
+    cursor.execute('''SELECT * from `events`''')
+    column_names = ('idEvent', 'start_date', 'end_date', 'text','idAvion','idTypeVol','idUserReserver','idUserEnseigner')
+    evenements = cursor.fetchall()
+    mysql.connection.commit()
+    cursor.close()
+    liste_evenements = []
+    for event in evenements:
+        event_to_add = {column_names[i] : event [i] for i in range(8)}
+        liste_evenements.append(event_to_add)
+    liste_evenements = json.dumps(liste_evenements, cls=DatetimeEncoder)
+    return render_template("calendrier.html", info=liste_evenements)
 
 @app.route("/test")
 def test():
