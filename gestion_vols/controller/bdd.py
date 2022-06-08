@@ -262,3 +262,30 @@ def saveDataFromFile(data):
     except mysql.connector.Error as err:
         msg = "Failed saveDataFromFile data : {}".format(err)
     return msg
+
+def disponibilite_avion(param_idAvion, param_start_date, param_end_date):
+    disp = True
+    try:
+        cnx, error = connexion()
+        if error is not None:
+            return disp, error #pb de connection a la bdd
+        cursor = cnx.cursor(dictionary=True)
+        sql = "SELECT start_date, end_date FROM events WHERE idAvion = %s"
+        cursor.execute(sql, (param_idAvion,))
+        list_data = cursor.fetchall()
+        close_bd(cursor, cnx)
+        msg = "OK get start_date from events"
+    except mysql.connector.Error as err :
+        list_data = None
+        msg = "Failed get events start_date : {}".format(err)
+    
+    list_same_day_events = []
+    for d in list_data :
+        if param_start_date.split()[0] == d[0].split()[0]
+            disp = False
+            list_same_day_events.append(d)
+    if disp :           #retourne True si aucun enregistrement n'est programmé ce jour
+        return disp
+    
+    for d in list_same_day_events:
+        if  int(d[0].split()[1].split(":")[0]) int(param_start_date.split()[1].split(":")[0]) 
