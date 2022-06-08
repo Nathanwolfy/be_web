@@ -133,7 +133,7 @@ def addMembre():
     motPasse=request.form['motPasse']
     statut=request.form['rad[]']
     avatar=request.form['avatar']
-    msg,lastId=bdd.add_userData(nom,prenom,mail,login,motPasse,statut,avatar)
+    msg,lastId=bdd.add_userData(nom,prenom,mail,login,hashage_mdp.hash_mdp(motPasse),statut,avatar)
     if msg=="OK add user":
         return redirect("/compte/addUserOK")
     else:
