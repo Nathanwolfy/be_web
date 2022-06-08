@@ -189,23 +189,6 @@ class DatetimeEncoder(json.JSONEncoder):
         except TypeError:
             return str(obj)
 
-
-"""BACKUP
-@app.route("/calendrier")
-def calendrier():
-    cursor = mysql.connection.cursor()
-    cursor.execute('''SELECT * from `events`''')
-    column_names = ('idEvent', 'start_date', 'end_date', 'text','idAvion','idTypeVol','idUserReserver','idUserEnseigner')
-    evenements = cursor.fetchall()
-    mysql.connection.commit()
-    cursor.close()
-    liste_evenements = []
-    for event in evenements:
-        event_to_add = {column_names[i] : event [i] for i in range(8)}
-        liste_evenements.append(event_to_add)
-    liste_evenements = json.dumps(liste_evenements, cls=DatetimeEncoder)
-    return render_template("calendrier.html", info=liste_evenements)"""
-
 @app.route("/calendrier")
 def calendrier():
 
