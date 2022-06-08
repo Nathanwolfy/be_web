@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : lun. 30 mai 2022 à 09:15
+-- Généré le : mer. 08 juin 2022 à 18:09
 -- Version du serveur :  8.0.25-0ubuntu0.20.04.1
 -- Version de PHP : 7.4.3
 
@@ -25,6 +25,7 @@ CREATE DATABASE IF NOT EXISTS `IENAC21_Bineau_Dagorn_Dauriac_Ledergerber` DEFAUL
 USE `IENAC21_Bineau_Dagorn_Dauriac_Ledergerber`;
 
 -- --------------------------------------------------------
+
 --
 -- Structure de la table `aeroclub`
 --
@@ -99,7 +100,7 @@ CREATE TABLE `events` (
 --
 
 INSERT INTO `events` (`idEvent`, `start_date`, `end_date`, `text`, `idAvion`, `idTypeVol`, `idUserReserver`, `idUserEnseigner`) VALUES
-(1, '2022-05-14 10:00:00', '2022-05-14 11:00:00', 'vroum vroum l a trois huit eau', 1, 2, 1, NULL),
+(1, '2022-05-14 10:00:00', '2022-05-14 11:00:00', 'sortie à Nice pour touch and go', 1, 2, 1, NULL),
 (2, '2022-05-14 10:00:00', '2022-05-14 11:00:00', 'DR400 aeroclub de la cote de granit sortie', 6, 1, 10, NULL),
 (3, '2022-05-15 14:30:00', '2022-05-15 17:00:00', 'Sortie du coté des alizés', 9, 1, 8, 11),
 (4, '2022-05-15 08:00:00', '2022-05-15 08:30:00', 'vol de dérouillage pour la journée', 7, 2, 4, NULL),
@@ -107,7 +108,7 @@ INSERT INTO `events` (`idEvent`, `start_date`, `end_date`, `text`, `idAvion`, `i
 (6, '2022-05-15 11:00:00', '2022-05-15 12:00:00', 'vol d initiation avant de manger', 7, 2, 10, 11),
 (7, '2022-05-15 12:30:00', '2022-05-15 14:00:00', 'Vol petite sortie à Concarneau', 7, 2, 1, NULL),
 (8, '2022-05-15 15:00:00', '2022-05-15 16:00:00', 'looping', 7, 2, 9, NULL),
-(9, '2022-05-15 18:00:00', '2022-05-15 18:30:00', 'test vérification des moteurs à l’huile de friture', 7, 2, 4, NULL),
+(9, '2022-05-15 18:00:00', '2022-05-15 18:30:00', 'test vérification des moteurs à l’huile de friture', 7, 3, 4, NULL),
 (10, '2022-05-14 07:00:00', '2022-05-14 13:00:00', 'Allé retour a New York pour manger un donut', 7, 2, 5, NULL),
 (11, '2022-05-14 15:00:00', '2022-05-14 16:00:00', 'test de vol en IFR', 7, 2, 6, 11),
 (33, '2022-05-13 08:00:00', '2022-05-13 08:30:00', 'vol de dérouillage pour la journée', 7, 2, 2, NULL),
@@ -119,7 +120,7 @@ INSERT INTO `events` (`idEvent`, `start_date`, `end_date`, `text`, `idAvion`, `i
 (39, '2022-05-11 08:30:00', '2022-05-11 17:30:00', 'aller voir Charlie Dalin dans le sud', 7, 2, 4, NULL),
 (40, '2022-05-12 09:30:00', '2022-05-12 14:30:00', 'prendre une photo du burj khalifa', 7, 2, 8, NULL),
 (41, '2022-05-12 15:30:00', '2022-05-12 16:00:00', 'apprentissage avec instructeur', 7, 2, 4, 11),
-(42, '2022-05-12 16:00:00', '2022-05-12 20:30:00', 'nettoyage et maintenance = avion non disponible', 7, 2, 6, NULL),
+(42, '2022-05-12 16:00:00', '2022-05-12 20:30:00', 'nettoyage et maintenance = avion non disponible', 7, 3, 6, NULL),
 (43, '2022-05-09 08:00:00', '2022-05-09 10:30:00', 'Vol de check pour la semaine', 7, 2, 4, NULL),
 (44, '2022-05-09 11:30:00', '2022-05-09 16:30:00', 'passage au sables', 7, 2, 1, NULL),
 (45, '2022-05-09 17:30:00', '2022-05-09 18:30:00', 'Aller chercher un remorqueur de planeur a Muret', 7, 2, 6, NULL),
@@ -177,7 +178,8 @@ CREATE TABLE `typeVol` (
 
 INSERT INTO `typeVol` (`idTypeVol`, `nomTypeVol`) VALUES
 (1, 'VFR'),
-(2, 'IFR');
+(2, 'IFR'),
+(3, 'Maintenance');
 
 --
 -- Index pour les tables déchargées
@@ -240,7 +242,7 @@ ALTER TABLE `avions`
 -- AUTO_INCREMENT pour la table `events`
 --
 ALTER TABLE `events`
-  MODIFY `idEvent` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idEvent` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT pour la table `identification`
@@ -252,7 +254,7 @@ ALTER TABLE `identification`
 -- AUTO_INCREMENT pour la table `typeVol`
 --
 ALTER TABLE `typeVol`
-  MODIFY `idTypeVol` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idTypeVol` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Contraintes pour les tables déchargées
