@@ -32,35 +32,36 @@
     <script>
         window.onload = () => {
             let elementCalendrier = document.getElementById("calendrier")
-            let evenements = JSON.parse('{{evenements|safe}}')
+            let evenements = JSON.parse('{{info|safe}}')
                 // evenements.forEach(event => console.log(event))
-            let calendar_res = []
+            let calendar = []
             for (let k = 0; k < evenements.length; k++) {
                 new_event = {
                     title: evenements[k].text,
                     start: evenements[k].start_date,
                     end: evenements[k].end_date
                 }
-                calendar_res.push(new_event)
+                calendar.push(new_event)
             }
+            // console.log(calendar)
 
-            let calendar = new FullCalendar.Calendar(elementCalendrier, {
-                initialView: 'resourceTimelineDay',
+            let calendrier = new FullCalendar.Calendar(elementCalendrier, {
+                initialView: 'dayGridMonth',
                 locale: 'fr',
                 headerToolbar: {
                     start: 'prev,next today',
                     center: 'title',
                     end: 'dayGridMonth timeGridWeek'
                 },
-                aspectRatio: 1.5,
-                resourceAreaColumns: [{
-                    field: 'title',
-                    headerContent: 'Avion'
-                }],
-                resources: calendar_res
-            });
+                buttonText: {
+                    today: 'Aujourd\'hui',
+                    month: 'Mois',
+                    week: 'Semaine'
+                },
+                events: calendar
+            })
 
-            calendar.render();
+            calendrier.render()
         }
     </script>
 
