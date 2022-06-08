@@ -134,15 +134,11 @@ def add_eventsData(param_start_date_events, param_end_date_events, param_text_ev
         cursor = cnx.cursor()
         sql = "INSERT INTO events (start_date, end_date, text, idAvion, idTypeVol, idUserReserver, idUserEnseigner) VALUES (%s, %s, %s, %s, %s, %s, %s)"
         param = (param_start_date_events, param_end_date_events, param_text_events, param_idAvion_events, param_idTypeVol_events, param_idUserReserver_events, param_idUserEnseigner_events)
-        if disponibilite_avion(param_idAvion_events,param_start_date_events,param_end_date_events):
-            cursor.execute(sql, param)
-            last_id = cursor.lastrowid #dernier id_events utilise pour l'auto incrementation
-            cnx.commit()
-            close_bd(cursor, cnx)
-            msg = "OK add events"
-        else:
-            msg = "Failed add events data : {}".format(mysql.connector.Error)
-            last_id = None
+        cursor.execute(sql, param)
+        last_id = cursor.lastrowid #dernier id_events utilise pour l'auto incrementation
+        cnx.commit()
+        close_bd(cursor, cnx)
+        msg = "OK add events"
     except mysql.connector.Error as err:
         last_id = None
         msg = "Failed add events data : {}".format(err)
