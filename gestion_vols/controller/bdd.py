@@ -134,11 +134,15 @@ def add_eventsData(param_start_date_events, param_end_date_events, param_text_ev
         cursor = cnx.cursor()
         sql = "INSERT INTO events (start_date, end_date, text, idAvion, idTypeVol, idUserReserver, idUserEnseigner) VALUES (%s, %s, %s, %s, %s, %s, %s)"
         param = (param_start_date_events, param_end_date_events, param_text_events, param_idAvion_events, param_idTypeVol_events, param_idUserReserver_events, param_idUserEnseigner_events)
-        cursor.execute(sql, param)
-        last_id = cursor.lastrowid #dernier id_events utilise pour l'auto incrementation
-        cnx.commit()
-        close_bd(cursor, cnx)
-        msg = "OK add events"
+        if disponibilite_avion(param_idAvion_events,param_start_date_events,param_end_date_events):
+            cursor.execute(sql, param)
+            last_id = cursor.lastrowid #dernier id_events utilise pour l'auto incrementation
+            cnx.commit()
+            close_bd(cursor, cnx)
+            msg = "OK add events"
+        else:
+            msg = "Failed add events data : {}".format(mysql.connector.Error)
+            last_id = None
     except mysql.connector.Error as err:
         last_id = None
         msg = "Failed add events data : {}".format(err)
@@ -271,69 +275,70 @@ def disponibilite_avion(param_idAvion, param_start_date, param_end_date):
             return disp, error #pb de connection a la bdd
         cursor = cnx.cursor(dictionary=True)
         sql = "SELECT start_date, end_date FROM events WHERE idAvion = %s"
-        cursor.execute(sql, (param_idAvion,))
+        cursor.execute(sql, param_idAvion)
         list_data = cursor.fetchall()
         close_bd(cursor, cnx)
         msg = "OK get start_date from events"
-    except mysql.connector.Error as err :
-        list_data = None
-        msg = "Failed get events start_date : {}".format(err)
     
-    list_same_day_events = []
-    for d in list_data :
-        if param_start_date.split()[0] == d[0].split()[0]:
-            disp = False
-            list_same_day_events.append(d)
-    if disp :           #retourne True si aucun enregistrement n'est programmé ce jour
-        return disp
+        list_same_day_events = []
+        for d in list_data :
+            if param_start_date.split()[0] == d[0].split()[0]:
+                disp = False
+                list_same_day_events.append(d)
+        if disp :           #retourne True si aucun enregistrement n'est programmé ce jour
+            return disp
 
-    rdv_heure_debut,rdv_minute_debut,rdv_seconde_debut = param_start_date.split()[1].split(":")
-    rdv_heure_debut = int(rdv_heure_debut)
-    rdv_minute_debut = int(rdv_minute_debut)
-    rdv_seconde_debut = int(rdv_seconde_debut)
+        rdv_heure_debut,rdv_minute_debut,rdv_seconde_debut = param_start_date.split()[1].split(":")
+        rdv_heure_debut = int(rdv_heure_debut)
+        rdv_minute_debut = int(rdv_minute_debut)
+        rdv_seconde_debut = int(rdv_seconde_debut)
 
-    rdv_heure_fin,rdv_minute_fin,rdv_seconde_fin = param_end_date.split()[1].split(":")
-    rdv_heure_fin = int(rdv_heure_fin)
-    rdv_minute_fin = int(rdv_minute_fin)
-    rdv_seconde_fin = int(rdv_seconde_fin)
+        rdv_heure_fin,rdv_minute_fin,rdv_seconde_fin = param_end_date.split()[1].split(":")
+        rdv_heure_fin = int(rdv_heure_fin)
+        rdv_minute_fin = int(rdv_minute_fin)
+        rdv_seconde_fin = int(rdv_seconde_fin)
 
-    disp = True
+        disp = True
 
-    for d in list_same_day_events:
+        for d in list_same_day_events:
 
-        d_heure_debut,d_minute_debut,d_seconde_debut = d[0].split()[1].split(":")
-        d_heure_debut = int(d_heure_debut)
-        d_minute_debut = int(d_minute_debut)
-        d_seconde_debut = int(d_seconde_debut)
+            d_heure_debut,d_minute_debut,d_seconde_debut = d[0].split()[1].split(":")
+            d_heure_debut = int(d_heure_debut)
+            d_minute_debut = int(d_minute_debut)
+            d_seconde_debut = int(d_seconde_debut)
 
-        d_heure_fin,d_minute_fin,d_seconde_fin = d[1].split()[1].split(":")
-        d_heure_fin = int(d_heure_fin)
-        d_minute_fin = int(d_minute_fin)
-        d_seconde_fin = int(d_seconde_fin)
+            d_heure_fin,d_minute_fin,d_seconde_fin = d[1].split()[1].split(":")
+            d_heure_fin = int(d_heure_fin)
+            d_minute_fin = int(d_minute_fin)
+            d_seconde_fin = int(d_seconde_fin)
 
-        if d_heure_debut < rdv_heure_debut and d_heure_fin < rdv_heure_debut :
-            pass
-        if d_heure_debut < rdv_heure_debut and d_heure_fin == rdv_heure_debut :
-            if d_minute_fin <= rdv_minute_fin :
+            if d_heure_debut < rdv_heure_debut and d_heure_fin < rdv_heure_debut :
                 pass
-            else :
-                return False
-        if d_heure_debut < rdv_heure_debut and d_heure_fin > rdv_heure_debut:
-            return False
-
-        if d_heure_debut == rdv_heure_debut and d_heure_fin == rdv_heure_fin:
-            if d_minute_fin == rdv_minute_debut :
-                pass
-            else :
-                return False
-        
-        if d_heure_debut > rdv_heure_debut :
-            if d_heure_debut > rdv_heure_fin:
-                pass
-            if  d_heure_debut == rdv_heure_fin :
-                if rdv_minute_fin < d_minute_debut:
+            if d_heure_debut < rdv_heure_debut and d_heure_fin == rdv_heure_debut :
+                if d_minute_fin <= rdv_minute_fin :
                     pass
                 else :
                     return False
+            if d_heure_debut < rdv_heure_debut and d_heure_fin > rdv_heure_debut:
+                return False
 
-        return disp
+            if d_heure_debut == rdv_heure_debut and d_heure_fin == rdv_heure_fin:
+                if d_minute_fin == rdv_minute_debut :
+                    pass
+                else :
+                    return False
+            
+            if d_heure_debut > rdv_heure_debut :
+                if d_heure_debut > rdv_heure_fin:
+                    pass
+                if  d_heure_debut == rdv_heure_fin :
+                    if rdv_minute_fin < d_minute_debut:
+                        pass
+                    else :
+                        return False
+
+            return disp
+
+    except mysql.connector.Error as err :
+        list_data = None
+        msg = "Failed get events start_date : {}".format(err)
