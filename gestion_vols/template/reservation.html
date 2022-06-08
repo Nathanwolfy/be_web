@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Réservation</title>
+    {% include("layout/head.html") %}
+
+</head>
+
+<body>
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-center ">
+        {% include("layout/header.html") %} 
+        {% if info and info == "reservationOK" %}
+        <div class="alert alert-success text-center"> Réservation enregistrée </div>
+        {% endif %} 
+        {% if info and info == "reservationPbm" %}
+        <div class="alert alert-danger text-center"> Problème de réservation </div>
+        {% endif %}
+    </header>
+    <!-- End Header -->
+
+    <main id="main">
+
+        <!-- ======= Reservation Section ======= -->
+        <section class="breadcrumbs">
+            <div class="container">
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <h2>Réservation</h2>
+                    <ol>
+                        <li><a href="index">Accueil</a></li>
+                        <li>Réservation</li>
+                    </ol>
+                </div>
+
+            </div>
+        </section>
+        <!-- End Reservation Section -->
+
+
+        <!--Formulaire section : nom, prenom, mail, login, mdp, statut(1), avatar-->
+        <form method="post" action="addMembre">
+
+            <div class="section-title">
+                <h2>Réservez votre vol</h2>
+                <p></p>
+            </div>
+
+            <div class="text-center">
+                
+                <div class="form-group mt-3">
+                    <label for="club">Aéroclub</label></br>
+                    <input type="text" name="club" id="club" placeholder="Entrer votre aéroclub" required/>
+                </div>
+                <div class="form-group mt-3">
+                    <select name="monSelect" aria-label="monSelect">
+                        <option selected disabled>Choisissez votre avion</option>
+                        <option value="1">A-380</option>
+                        <option value="2">TB-10</option>
+                        <option value="3">CRJ1000</option>
+                        <option value="4">DR-400 (F-HVIU)</option>
+                        <option value="5">DR-400 (F-PLAQ)</option>
+                        <option value="6">DR-400 (F-OZPE)</option>
+                        <option value="7">Concorde</option>
+                        <option value="8">Cessna 172</option>
+                        <option value="9">Cessna 182</option>
+                        <option value="10">A-330</option>
+                        <option value="11">Piper-Arrow</option>
+                    </select required></br>
+                </div>
+                <div class="form-group mt-3">
+                
+                    <label for="comment">Quels sont les motifs de votre réservation ?</label></br>
+                    <textarea name="comment" id="comment"></textarea>   
+                </div>
+
+                <div class="form-group mt-3">
+                    <label for="radio">Type de vol</label></br>
+
+                    <input type="radio" name="rad[]" id="R1" value="1" />
+                    <label for="R1">VFR &emsp;</label>
+
+                    <input type="radio" name="rad[]" id="R2" value="2" />
+                    <label for="R2">IFR</label>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label for="maDate">Date du vol</label></br>
+                    <input type="date" name="maDate" id="maDate"/></br></br>
+
+                    <label for="startheure">Heure de départ</label></br>
+                    <input type="time" name="startheure" id="startheure"/></br></br>
+
+                    <label for="endheure">Heure d'arrivée</label></br>
+                    <input type="time" name="endheure" id="endheure"/>
+                    
+                </div>
+                <div>
+                    </br>
+                    <button type="submit">Enregistrer la réservation</button>
+                </br>
+                </div>
+            </div>
+
+
+        </form>
+
+    </main>
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
+        {% include("layout/footer.html") %}
+    </footer>
+    <!-- End Footer -->   
+</body>
+</html>
