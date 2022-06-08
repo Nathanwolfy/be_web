@@ -185,7 +185,9 @@ def calendrier():
 
     #Récupérer la liste des avions
     liste_avions = bdd.get_tableData('`avions`')[0]
+    liste_avions_tosend = []
     liste_avions = json.dumps(liste_avions, cls=DatetimeEncoder)
+    print(liste_avions)
 
 
 
