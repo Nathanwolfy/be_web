@@ -102,7 +102,17 @@ CREATE TABLE `events` (
 INSERT INTO `events` (`idEvent`, `start_date`, `end_date`, `text`, `idAvion`, `idTypeVol`, `idUserReserver`, `idUserEnseigner`) VALUES
 (1, '2022-05-14 10:00:00', '2022-05-14 11:00:00', 'vroum vroum l a trois huit eau', 1, 2, 1, NULL),
 (2, '2022-05-14 10:00:00', '2022-05-14 11:00:00', 'DR400 aeroclub de la cote de granit sortie', 6, 1, 10, NULL),
-(3, '2022-05-15 14:30:00', '2022-05-15 17:00:00', 'Sortie du coté des alizés', 9, 1, 8, 11);
+(3, '2022-05-15 14:30:00', '2022-05-15 17:00:00', 'Sortie du coté des alizés', 9, 1, 8, 11),
+(4, '2022-05-15 08:00:00', '2022-05-15 08:30:00', 'vol de dérouillage pour la journée', 7, 2, 4, NULL),
+(5, '2022-05-15 09:00:00', '2022-05-15 10:30:00', 'sortie pour aller a Nuuk', 7, 2, 6, 11),
+(6, '2022-05-15 11:00:00', '2022-05-15 12:00:00', 'vol d initiation avant de manger', 7, 2, 10, 11),
+(7, '2022-05-15 12:30:00', '2022-05-15 14:00:00', 'Vol petite sortie à Concarneau', 7, 2, 1, NULL),
+(8, '2022-05-15 15:00:00', '2022-05-15 16:00:00', 'looping', 7, 2, 9, NULL),
+(9, '2022-05-15 18:00:00', '2022-05-15 18:30:00', 'test vérification des moteurs à l’huile de friture', 7, 2, 4, NULL),
+(10, '2022-05-14 07:00:00', '2022-05-14 13:00:00', 'Allé retour a New York pour manger un donut', 7, 2, 5, NULL),
+(11, '2022-05-14 15:00:00', '2022-05-14 16:00:00', 'test de vol en IFR', 7, 2, 6, 11),
+(33, '2022-05-13 08:00:00', '2022-05-13 08:30:00', 'vol de dérouillage pour la journée', 7, 2, 2, NULL),
+(34, '2022-05-13 09:30:00', '2022-05-13 10:30:00', 'sortie rapide', 7, 2, 9, NULL),
 
 -- --------------------------------------------------------
 
