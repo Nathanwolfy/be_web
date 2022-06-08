@@ -156,7 +156,7 @@ def addEvent():
 
     param_idUserReserver_events=session["idUser"]
 
-    msg,lastId=bdd.add_eventsData(param_start_date_events, param_end_date_events, param_text_events, param_idAvion_events, param_idTypeVol_events, param_idUserReserver_events,"")
+    msg,lastId=bdd.add_eventsData(param_start_date_events, param_end_date_events, param_text_events, param_idAvion_events, param_idTypeVol_events, param_idUserReserver_events,1)
     if msg=="OK add events":
         return redirect("/reservation/reservationOK")
     else:
