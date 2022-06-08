@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Fichier</title>
+    <title>Importation données</title>
     {% include("layout/head.html") %}
 </head>
 
@@ -10,30 +10,58 @@
 
     <!-- ======= Header ======= -->
     <header id="header" class="fixed-top d-flex align-items-center ">
-        {% include("layout/header.html") %}
+        {% include("layout/header.html") %} {% if info and info=="importDataOK" %}
+        <div class="alert alert-success">
+            <span class="badge badge-pill bg-success">Success</span> Importation des données réussie
+        </div>
+        {% elif info and info=="importDataEchec" %}
+        <div class="alert alert-danger text-center">
+            <span class="badge badge-pill bg-danger">Fail</span> Importation des données échouée
+        </div>
+        {% endif %}
     </header>
     <!-- End Header -->
 
     <main id="main">
 
-<form action="/fichiers" method="POST" enctype="multipart/form-data" class="d-flex">
-    <label for="data"></label>
-    <input type="file" id="data_excel" name="data_excel">
-    <button type="submit">
-        <i class="fas fa-download">Envoyer</i>
-    </button>
-</form>
-</main>
-<!-- End #main -->
+        <section class="breadcrumbs">
+            <div class="container">
 
-<!-- ======= Footer ======= -->
-<footer id="footer" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
-    {% include("layout/footer.html") %}
-</footer>
-<!-- End Footer -->
+                <div class="d-flex justify-content-between align-items-center">
+                    <h2>Importation de données</h2>
+                    <ol>
+                        <li><a href="/index">Accueil</a></li>
+                        <li>Importation de données</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
 
-<!-- Include scripts and back to top arrow-->
-{% include("layout/scripts.html") %}
+
+        <section class="connexion" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
+            <div class="text-center">
+                <form action="/fichiers" method="POST" enctype="multipart/form-data" class="d-flex">
+                    <div style="float: left;" class="form-group mt-3">
+                        <label for="data"></label>
+                        <input type="file" id="data_excel" name="data_excel">
+                    </div>
+                    <div style="float: left;" class="form-group mt-3">
+                        <button type="submit"><i class="fas fa-download">Envoyer</i> </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+    <!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
+        {% include("layout/footer.html") %}
+    </footer>
+    <!-- End Footer -->
+
+    <!-- Include scripts and back to top arrow-->
+    {% include("layout/scripts.html") %}
 </body>
 
 </html>
