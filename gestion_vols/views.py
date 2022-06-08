@@ -1,5 +1,3 @@
-import mailbox
-import pathlib
 from xml.dom import NoModificationAllowedErr
 from flask_mysqldb import MySQL
 from flask import Flask, render_template, session, request, redirect, make_response
