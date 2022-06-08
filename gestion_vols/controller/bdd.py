@@ -263,7 +263,6 @@ def saveDataFromFile(data):
         msg = "Failed saveDataFromFile data : {}".format(err)
     return msg
 
-"""""
 def disponibilite_avion(param_idAvion, param_start_date, param_end_date):
     disp = True
     try:
@@ -282,12 +281,59 @@ def disponibilite_avion(param_idAvion, param_start_date, param_end_date):
     
     list_same_day_events = []
     for d in list_data :
-        if param_start_date.split()[0] == d[0].split()[0]
+        if param_start_date.split()[0] == d[0].split()[0]:
             disp = False
             list_same_day_events.append(d)
     if disp :           #retourne True si aucun enregistrement n'est programmé ce jour
         return disp
-    
+
+    rdv_heure_debut,rdv_minute_debut,rdv_seconde_debut = param_start_date.split()[1].split(":")
+    rdv_heure_debut = int(rdv_heure_debut)
+    rdv_minute_debut = int(rdv_minute_debut)
+    rdv_seconde_debut = int(rdv_seconde_debut)
+
+    rdv_heure_fin,rdv_minute_fin,rdv_seconde_fin = param_end_date.split()[1].split(":")
+    rdv_heure_fin = int(rdv_heure_fin)
+    rdv_minute_fin = int(rdv_minute_fin)
+    rdv_seconde_fin = int(rdv_seconde_fin)
+
+    disp = True
+
     for d in list_same_day_events:
-        if  int(d[0].split()[1].split(":")[0]) int(param_start_date.split()[1].split(":")[0]) 
-"""
+
+        d_heure_debut,d_minute_debut,d_seconde_debut = d[0].split()[1].split(":")
+        d_heure_debut = int(d_heure_debut)
+        d_minute_debut = int(d_minute_debut)
+        d_seconde_debut = int(d_seconde_debut)
+
+        d_heure_fin,d_minute_fin,d_seconde_fin = d[1].split()[1].split(":")
+        d_heure_fin = int(d_heure_fin)
+        d_minute_fin = int(d_minute_fin)
+        d_seconde_fin = int(d_seconde_fin)
+
+        if d_heure_debut < rdv_heure_debut and d_heure_fin < rdv_heure_debut :
+            pass
+        if d_heure_debut < rdv_heure_debut and d_heure_fin = rdv_heure_debut :
+            if d_minute_fin <= rdv_minute_fin :
+                pass
+            else :
+                return False
+        if d_heure_debut < rdv_heure_debut and d_heure_fin > rdv_heure_debut:
+            return False
+
+        if d_heure_debut = rdv_heure_debut and d_heure_fin = rdv_heure_fin:
+            if d_minute_fin = rdv_minute_debut :
+                pass
+            else :
+                return False
+        
+        if d_heure_debut > rdv_heure_debut :
+            if d_heure_debut > rdv_heure_fin:
+                pass
+            if  d_heure_debut = rdv_heure_fin :
+                if rdv_minute_fin < d_minute_debut:
+                    pass
+                else :
+                    return False
+
+        return disp
