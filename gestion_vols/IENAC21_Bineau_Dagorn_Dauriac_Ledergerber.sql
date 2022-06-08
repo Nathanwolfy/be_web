@@ -25,7 +25,6 @@ CREATE DATABASE IF NOT EXISTS `IENAC21_Bineau_Dagorn_Dauriac_Ledergerber` DEFAUL
 USE `IENAC21_Bineau_Dagorn_Dauriac_Ledergerber`;
 
 -- --------------------------------------------------------
-
 --
 -- Structure de la table `aeroclub`
 --
@@ -112,7 +111,20 @@ INSERT INTO `events` (`idEvent`, `start_date`, `end_date`, `text`, `idAvion`, `i
 (10, '2022-05-14 07:00:00', '2022-05-14 13:00:00', 'Allé retour a New York pour manger un donut', 7, 2, 5, NULL),
 (11, '2022-05-14 15:00:00', '2022-05-14 16:00:00', 'test de vol en IFR', 7, 2, 6, 11),
 (33, '2022-05-13 08:00:00', '2022-05-13 08:30:00', 'vol de dérouillage pour la journée', 7, 2, 2, NULL),
-(34, '2022-05-13 09:30:00', '2022-05-13 10:30:00', 'sortie rapide', 7, 2, 9, NULL);
+(34, '2022-05-13 09:30:00', '2022-05-13 10:30:00', 'sortie rapide', 7, 2, 9, NULL),
+(35, '2022-05-13 10:30:00', '2022-05-13 12:30:00', 'amener le ministre', 7, 2, 3, NULL),
+(36, '2022-05-13 14:30:00', '2022-05-13 16:00:00', 'vol sortie a henanbien', 7, 2, 10, NULL),
+(37, '2022-05-13 19:00:00', '2022-05-13 21:30:00', 'initiation a la voltige', 7, 2, 6, 11),
+(38, '2022-05-11 08:00:00', '2022-05-11 08:30:00', 'vol d essai airbus', 7, 2, 3, NULL),
+(39, '2022-05-11 08:30:00', '2022-05-11 17:30:00', 'aller voir Charlie Dalin dans le sud', 7, 2, 4, NULL),
+(40, '2022-05-12 09:30:00', '2022-05-12 14:30:00', 'prendre une photo du burj khalifa', 7, 2, 8, NULL),
+(41, '2022-05-12 15:30:00', '2022-05-12 16:00:00', 'apprentissage avec instructeur', 7, 2, 4, 11),
+(42, '2022-05-12 16:00:00', '2022-05-12 20:30:00', 'nettoyage et maintenance = avion non disponible', 7, 2, 6, NULL),
+(43, '2022-05-09 08:00:00', '2022-05-09 10:30:00', 'Vol de check pour la semaine', 7, 2, 4, NULL),
+(44, '2022-05-09 11:30:00', '2022-05-09 16:30:00', 'passage au sables', 7, 2, 1, NULL),
+(45, '2022-05-09 17:30:00', '2022-05-09 18:30:00', 'Aller chercher un remorqueur de planeur a Muret', 7, 2, 6, NULL),
+(46, '2022-05-10 06:30:00', '2022-05-10 12:00:00', 'matinee mont saint michel', 7, 2, 5, 11),
+(47, '2022-05-10 14:00:00', '2022-05-10 19:30:00', 'vol test des tubes pitots', 7, 2, 9, NULL);
 
 -- --------------------------------------------------------
 
