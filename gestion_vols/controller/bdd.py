@@ -263,6 +263,7 @@ def saveDataFromFile(data):
         msg = "Failed saveDataFromFile data : {}".format(err)
     return msg
 
+"""""
 def disponibilite_avion(param_idAvion, param_start_date, param_end_date):
     disp = True
     try:
@@ -289,3 +290,4 @@ def disponibilite_avion(param_idAvion, param_start_date, param_end_date):
     
     for d in list_same_day_events:
         if  int(d[0].split()[1].split(":")[0]) int(param_start_date.split()[1].split(":")[0]) 
+"""

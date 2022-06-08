@@ -63,20 +63,22 @@ def services():
 def team():
     return render_template("team.html")
 
+
 @app.route("/reservation")
-@app.route("/resrvation/<infoMsg>")
+@app.route("/reservation/<infoMsg>")
 def reservation(infoMsg=''):
     return render_template("reservation.html",info=infoMsg)
 
 @app.route("/reservationOK")
 def reservationOK():
     session.clear()
-    return redirect("/compte/reservationOK")
+    return redirect("/reservation/reservationOK")
 
 @app.route("/reservationPbm")
 def reservationPbm():
     session.clear()
-    return redirect("/compte/reservationPbm")
+    return redirect("/reservation/reservationPbm")
+
 
 @app.route("/compte")
 @app.route("/compte/<infoMsg>")
@@ -92,6 +94,7 @@ def addUserOK():
 def addUserProblem():
     session.clear()
     return redirect("/compte/addUserProblem")
+
 
 @app.errorhandler(404)
 def page_not_found(erreur):
@@ -142,7 +145,7 @@ def addMembre():
 @app.route("/addEvent",methods=['POST'])
 def addEvent():
     
-    param_idAvion_events=request.form['avion']
+    param_idAvion_events=request.form['monSelect']
     param_text_events=request.form['comment']
     param_idTypeVol_events=request.form['rad[]']
 
@@ -151,13 +154,13 @@ def addEvent():
     param_start_date_events=request.form['maDate'] + " " + heure_départ
     param_end_date_events=request.form['maDate'] + " " + heure_arrivée
 
-    param_idUserReserver_events=session.idUser
+    param_idUserReserver_events=session["idUser"]
 
     msg,lastId=bdd.add_eventsData(param_start_date_events, param_end_date_events, param_text_events, param_idAvion_events, param_idTypeVol_events, param_idUserReserver_events,"")
-    if msg=="OK add user":
-        return redirect("/compte/addUserOK")
+    if msg=="OK add events":
+        return redirect("/reservation/reservationOK")
     else:
-        return redirect("/compte/addUserProblem")
+        return redirect("/reservation/reservationPbm")
 
 
 
