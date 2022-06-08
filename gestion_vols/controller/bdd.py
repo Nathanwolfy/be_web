@@ -313,7 +313,7 @@ def disponibilite_avion(param_idAvion, param_start_date, param_end_date):
 
         if d_heure_debut < rdv_heure_debut and d_heure_fin < rdv_heure_debut :
             pass
-        if d_heure_debut < rdv_heure_debut and d_heure_fin = rdv_heure_debut :
+        if d_heure_debut < rdv_heure_debut and d_heure_fin == rdv_heure_debut :
             if d_minute_fin <= rdv_minute_fin :
                 pass
             else :
@@ -321,8 +321,8 @@ def disponibilite_avion(param_idAvion, param_start_date, param_end_date):
         if d_heure_debut < rdv_heure_debut and d_heure_fin > rdv_heure_debut:
             return False
 
-        if d_heure_debut = rdv_heure_debut and d_heure_fin = rdv_heure_fin:
-            if d_minute_fin = rdv_minute_debut :
+        if d_heure_debut == rdv_heure_debut and d_heure_fin == rdv_heure_fin:
+            if d_minute_fin == rdv_minute_debut :
                 pass
             else :
                 return False
@@ -330,7 +330,7 @@ def disponibilite_avion(param_idAvion, param_start_date, param_end_date):
         if d_heure_debut > rdv_heure_debut :
             if d_heure_debut > rdv_heure_fin:
                 pass
-            if  d_heure_debut = rdv_heure_fin :
+            if  d_heure_debut == rdv_heure_fin :
                 if rdv_minute_fin < d_minute_debut:
                     pass
                 else :
