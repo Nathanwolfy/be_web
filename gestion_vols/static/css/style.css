@@ -1401,6 +1401,49 @@ section {
 
 
 /*--------------------------------------------------------------
+# Administration
+--------------------------------------------------------------*/
+
+.compte {
+    padding-bottom: 30px;
+}
+
+.compte .text-center {
+    width: 33%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.compte .compte-form {
+    box-shadow: 0 0 30px rgba(214, 215, 216, 0.6);
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+.compte .compte-form input {
+    border-radius: 0;
+    box-shadow: none;
+    font-size: 14px;
+    padding: 10px 15px;
+}
+
+.compte .compte-form input::focus {
+    background-color: #68A4C4;
+}
+
+.compte .compte-form button[type=submit] {
+    background: #68A4C4;
+    border: 0;
+    padding: 10px 24px;
+    color: #fff;
+    transition: 0.4s;
+}
+
+.compte .compte-form button[type=submit]:hover {
+    background: #8dbad2;
+}
+
+/*--------------------------------------------------------------
 # Blog
 --------------------------------------------------------------*/
 
